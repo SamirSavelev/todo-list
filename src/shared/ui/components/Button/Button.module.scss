@@ -1,0 +1,84 @@
+$primary-color: #d04db5;
+$lidht-primary-color: #de76c9;
+$dark-primary-color: #a24490;
+$disabled-color: #888da7b9;
+
+.container {
+  transition: background 0.2s ease-out, color 0.2s ease-out,
+    border 0.2s ease-out;
+  width: max-content;
+}
+
+.primary {
+  background: $primary-color;
+  color: #fff;
+  &:hover {
+    background: $lidht-primary-color;
+  }
+  &:active {
+    background-color: $dark-primary-color;
+  }
+  &:disabled {
+    background-color: $disabled-color;
+  }
+}
+.outlined {
+  background: transparent;
+  border: 3px solid $primary-color;
+  color: $primary-color;
+  &:hover {
+    color: #fff;
+    background: $primary-color;
+  }
+  &:active {
+    color: #fff;
+    background: $dark-primary-color;
+    border: 3px solid $dark-primary-color;
+  }
+  &:disabled {
+    background: transparent;
+    color: $disabled-color;
+    border: 3px solid $disabled-color;
+  }
+}
+
+.default {
+  background: transparent;
+  color: $primary-color;
+  border: 3px solid transparent;
+  &:hover {
+    border: 3px solid $primary-color;
+  }
+  &:active {
+    color: $dark-primary-color;
+    border: 3px solid $dark-primary-color;
+  }
+  &:disabled {
+    background: transparent;
+    color: $disabled-color;
+    border: 3px solid transparent;
+  }
+}
+
+.large {
+  border-radius: 29px;
+  padding: 24px 32px;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.medium {
+  border-radius: 19px;
+  padding: 12px 24px;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.small {
+  border-radius: 17px;
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 600;
+}
