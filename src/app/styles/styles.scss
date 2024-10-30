@@ -1,0 +1,41 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #1c1d22;
+  --switch-background-light: rgba(28, 29, 34, 0.04);
+  --switch-slider-light-bg: #fff;
+  --switch-slider-light-shadow: 0px 8px 6px 0px rgba(28, 29, 34, 0.06);
+  --switch-text-light-active: #1c1d22;
+  --switch-text-light-inactive: rgba(28, 29, 34, 0.5);
+
+  /* Темная тема */
+  --switch-background-dark: rgba(255, 255, 255, 0.04);
+  --switch-slider-dark-bg: rgba(255, 255, 255, 0.06);
+  --switch-slider-dark-shadow: 0px 8px 6px 0px rgba(28, 29, 34, 0.16);
+  --switch-text-dark-active: #fff;
+  --switch-text-dark-inactive: rgba(255, 255, 255, 0.5);
+}
+body.light {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --switch-background-color: var(--switch-background-light);
+  --switch-slider-bg: var(--switch-slider-light-bg);
+  --switch-slider-shadow: var(--switch-slider-light-shadow);
+  --switch-text-color-active: var(--switch-text-light-active);
+  --switch-text-color-inactive: var(--switch-text-light-inactive);
+}
+
+body.dark {
+  --background-color: #2a2b2f;
+  --text-color: #fff;
+  --switch-background-color: var(--switch-background-dark);
+  --switch-slider-bg: var(--switch-slider-dark-bg);
+  --switch-slider-shadow: var(--switch-slider-dark-shadow);
+  --switch-text-color-active: var(--switch-text-dark-active);
+  --switch-text-color-inactive: var(--switch-text-dark-inactive);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
