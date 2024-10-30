@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./AuthPage.module.scss";
-import { Button, Input } from "../../../shared/ui/components";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { Button, Input } from "@shared/ui/components";
 
 export const AuthPage = () => {
   const [email, setEmail] = useState("test@gmail.com");

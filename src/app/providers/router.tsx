@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import { DraftPage } from "../../draft/DraftPage";
+import { DraftPage2 } from "../../draft/DraftPage2";
 import {
   AboutPage,
   HomePage,
@@ -6,17 +8,24 @@ import {
   AuthPage,
   RegisterPage,
 } from "../../pages";
-import { DraftPage } from "../../draft/DraftPage";
-import { DraftPage2 } from "../../draft/DraftPage2";
+import { Layout } from "@shared/ui/Layout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <Layout>
+        <HomePage />
+      </Layout>
+    ),
   },
   {
     path: "about",
-    element: <AboutPage />,
+    element: (
+      <Layout>
+        <AboutPage />
+      </Layout>
+    ),
   },
   {
     path: "*",
