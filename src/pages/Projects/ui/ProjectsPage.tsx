@@ -2,18 +2,28 @@ import { Modal } from "@shared/ui/components/Modal/Modal";
 import styles from "./ProjectsPage.module.scss";
 import { Button } from "@shared/ui/components/Button/Button";
 import { useState } from "react";
+import { CreateTaskModal } from "src/features/Modal/CreateTaskModal";
 
 export const ProjectsPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleSave = (taskName: string) => {
+    console.log("Сохранено название задачи:", taskName); // Можно сохранить в state или отправить в API
+    setModalOpen(false); // Закрываем модал после сохранения
+  };
+
+  const handleClose = () => {
+    setModalOpen(false); // Закрываем модал без сохранения
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.settings}>
         <Button type="primary" size="small" onClick={() => setModalOpen(true)}>
           Создать задачу
         </Button>
-        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-          <h2>Модальное окно</h2>
-          <p>Это содержимое модального окна</p>
+        <Modal isOpen={isModalOpen} onClose={handleClose}>
+          <CreateTaskModal onClose={handleClose} onSave={handleSave} />
         </Modal>
       </div>
     </div>
