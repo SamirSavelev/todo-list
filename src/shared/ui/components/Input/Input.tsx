@@ -8,6 +8,8 @@ export const Input: InputType = ({
   inputSuffix = <></>,
   disabled = false,
   label,
+  value,
+  onChange,
   ...props
 }) => {
   const [focus, setFocus] = useState(false);
@@ -29,6 +31,8 @@ export const Input: InputType = ({
           onBlur={() => setFocus(false)}
           className={styles.input}
           disabled={disabled}
+          value={value} // Передаем значение из формы
+          onChange={onChange} // Передаем управление изменением значения
           {...props}
         />
         {inputSuffix}

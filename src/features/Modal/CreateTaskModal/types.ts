@@ -1,7 +1,14 @@
 import { FC } from "react";
-
+export interface TaskFormData {
+  taskName: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  project: string;
+  duration: string;
+}
 interface CreateTaskModalProps {
-  onSave: (taskName: string) => void; // Обновляем тип onSave
+  onSave: (data: TaskFormData) => void; // Обновляем тип onSave
   onClose: () => void;
 }
 
