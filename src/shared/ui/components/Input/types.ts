@@ -6,6 +6,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputSize?: InputSize;
   inputPrefix?: ReactNode;
   inputSuffix?: ReactNode;
+  label?: string;
 }
 
 export type InputType = FC<InputProps>;

@@ -15,9 +15,25 @@ $disabled-color: #ccc;
   .textarea {
     width: 100%;
     background-color: transparent;
+    &::placeholder {
+      color: $disabled-color;
+    }
   }
 }
 .primary_border {
   outline: none;
   border-color: $primary-color;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: white;
 }

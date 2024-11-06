@@ -7,35 +7,32 @@ export const Input: InputType = ({
   inputPrefix = <></>,
   inputSuffix = <></>,
   disabled = false,
+  label,
   ...props
 }) => {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
+
   return (
-    <div
-      className={`${styles.container} ${styles[inputSize]} ${
-        disabled ? styles.disabled : ""
-      } ${(focus || hover) && !disabled ? styles.primary_border : ""}`}
-      onMouseEnter={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-    >
-      {inputPrefix}
-      <input
-        onFocus={() => {
-          setFocus(true);
-        }}
-        onBlur={() => {
-          setFocus(false);
-        }}
-        className={styles.input}
-        disabled={disabled}
-        {...props}
-      />
-      {inputSuffix}
+    <div className={styles.wrapper}>
+      {label && <label className={styles.label}>{label}</label>}
+      <div
+        className={`${styles.container} ${styles[inputSize]} ${
+          disabled ? styles.disabled : ""
+        } ${(focus || hover) && !disabled ? styles.primary_border : ""}`}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        {inputPrefix}
+        <input
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          className={styles.input}
+          disabled={disabled}
+          {...props}
+        />
+        {inputSuffix}
+      </div>
     </div>
   );
 };

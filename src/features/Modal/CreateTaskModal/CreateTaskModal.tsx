@@ -18,22 +18,27 @@ export const CreateTaskModal: CreateTaskModalType = ({ onSave, onClose }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <h3>Создание задачи</h3>
-      <h5>Название</h5>
-      <Input
-        placeholder="Придумайте название задачи"
-        value={taskName}
-        onChange={(e) => setTaskName(e.target.value)}
-      />
-      <h5>Описание</h5>
-      <Textarea placeholder="Опишите детали задачи" />
-      <Button type="primary" onClick={handleCancel}>
-        Отменить
-      </Button>
-      <Button type="primary" onClick={handleSave}>
-        Сохранить
-      </Button>
+    <div>
+      <div className={styles.container}>
+        <h3>Создание задачи</h3>
+        <Input
+          placeholder="Придумайте название задачи"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+          label="Название"
+        />
+        <Textarea placeholder="Опишите детали задачи" label="Описание" />
+        <Input type="date" label="Дата начала" />
+        <Input type="date" label="Дата окончания" />
+      </div>
+      <div className={styles.button_container}>
+        <Button type="primary" size="small" onClick={handleCancel}>
+          Отменить
+        </Button>
+        <Button type="primary" size="small" onClick={handleSave}>
+          Сохранить
+        </Button>
+      </div>
     </div>
   );
 };
