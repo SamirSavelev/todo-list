@@ -1,0 +1,25 @@
+.light {
+  --background-color: #{$background-color-light};
+  --text-color: #{$text-color-light};
+  --switch-background: #{$switch-background-light};
+  --switch-slider-bg: #{$switch-slider-light-bg};
+  --switch-slider-shadow: #{$switch-slider-light-shadow};
+  --switch-text-active: #{$switch-text-light-active};
+  --switch-text-inactive: #{$switch-text-light-inactive};
+}
+
+.dark {
+  --background-color: #{$background-color-dark};
+  --text-color: #{$text-color-dark};
+  --switch-background: #{$switch-background-dark};
+  --switch-slider-bg: #{$switch-slider-dark-bg};
+  --switch-slider-shadow: #{$switch-slider-dark-shadow};
+  --switch-text-active: #{$switch-text-dark-active};
+  --switch-text-inactive: #{$switch-text-dark-inactive};
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}

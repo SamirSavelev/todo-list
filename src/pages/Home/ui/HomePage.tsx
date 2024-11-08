@@ -1,5 +1,10 @@
-import { FC } from "react";
+import { Button, Input } from '@shared/ui/components';
+import { FC } from 'react';
 
 export const HomePage: FC = () => {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <Input label="saasfsa" />
+    </div>
+  );
 };

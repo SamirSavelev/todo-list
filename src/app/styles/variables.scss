@@ -1,0 +1,24 @@
+// Основные цвета:
+$primary-color: #d04db5;
+$lidht-primary-color: #de76c9;
+$dark-primary-color: #a24490;
+$disabled-color: #888da7b9;
+$white: #ffffff;
+
+// Светлая тема
+$background-color-light: #ffffff;
+$text-color-light: #1c1d22;
+$switch-background-light: rgba(28, 29, 34, 0.04);
+$switch-slider-light-bg: #fff;
+$switch-slider-light-shadow: 0px 8px 6px 0px rgba(28, 29, 34, 0.06);
+$switch-text-light-active: #1c1d22;
+$switch-text-light-inactive: rgba(28, 29, 34, 0.5);
+
+// Темная тема
+$background-color-dark: #2a2b2f;
+$text-color-dark: #ffffff;
+$switch-background-dark: rgba(255, 255, 255, 0.04);
+$switch-slider-dark-bg: rgba(255, 255, 255, 0.06);
+$switch-slider-dark-shadow: 0px 8px 6px 0px rgba(28, 29, 34, 0.16);
+$switch-text-dark-active: #ffffff;
+$switch-text-dark-inactive: rgba(255, 255, 255, 0.5);

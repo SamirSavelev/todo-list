@@ -1,6 +1,6 @@
 .switch {
   display: flex;
-  background-color: var(--switch-background-color);
+  background-color: var(--switch-background);
   border-radius: 22px;
   padding: 5px;
   width: 200px;
@@ -21,27 +21,27 @@
   border-radius: 30px;
   font-size: 16px;
   line-height: 16px;
-  color: var(--switch-text-color-inactive);
+  color: var(--switch-text-inactive);
   transition: color 0.3s ease;
   z-index: 1;
 
   .icon {
     margin-right: 6px;
-    fill: var(--switch-text-color-inactive);
+    fill: var(--switch-text-inactive);
 
     path {
-      fill: var(--switch-text-color-inactive);
+      fill: var(--switch-text-inactive);
     }
   }
 }
 
 .active {
-  color: var(--switch-text-color-active);
+  color: var(--switch-text-active);
 
   .icon {
-    fill: var(--switch-text-color-active);
+    fill: var(--switch-text-active);
     path {
-      fill: var(--switch-text-color-active);
+      fill: var(--switch-text-active);
     }
   }
 }

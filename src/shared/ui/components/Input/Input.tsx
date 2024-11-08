@@ -1,9 +1,9 @@
-import { useState } from "react";
-import styles from "./Input.module.scss";
-import { InputType } from "./types";
+import { useState } from 'react';
+import styles from './Input.module.scss';
+import { InputType } from './types';
 
 export const Input: InputType = ({
-  inputSize = "medium",
+  inputSize = 'medium',
   inputPrefix = <></>,
   inputSuffix = <></>,
   disabled = false,
@@ -20,8 +20,8 @@ export const Input: InputType = ({
       {label && <label className={styles.label}>{label}</label>}
       <div
         className={`${styles.container} ${styles[inputSize]} ${
-          disabled ? styles.disabled : ""
-        } ${(focus || hover) && !disabled ? styles.primary_border : ""}`}
+          disabled ? styles.disabled : ''
+        } ${(focus || hover) && !disabled ? styles.primary_border : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -31,8 +31,8 @@ export const Input: InputType = ({
           onBlur={() => setFocus(false)}
           className={styles.input}
           disabled={disabled}
-          value={value} // Передаем значение из формы
-          onChange={onChange} // Передаем управление изменением значения
+          value={value}
+          onChange={onChange}
           {...props}
         />
         {inputSuffix}
