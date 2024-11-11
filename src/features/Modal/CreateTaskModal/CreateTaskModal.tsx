@@ -68,6 +68,7 @@ export const CreateTaskModal: CreateTaskModalType = ({ onSave, onClose }) => {
       <div className={styles.button_container}>
         <Button
           size="small"
+          type="primary"
           onClick={() => {
             reset();
             onClose();

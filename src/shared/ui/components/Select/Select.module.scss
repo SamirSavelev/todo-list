@@ -2,13 +2,13 @@ $primary-color: #d04db5;
 $disabled-color: #ccc;
 
 .wrapper {
-  position: relative;
+  position: relative; // Создаёт контекст для .options
   width: 100%;
   margin: 15px 0;
 
   .label {
     margin-bottom: 4px;
-    font-size: 14px; // Установите размер шрифта, как в Input и Textarea
+    font-size: 14px;
     color: white;
   }
 }
@@ -39,24 +39,13 @@ $disabled-color: #ccc;
   }
 }
 
-.selected {
-  flex-grow: 1;
-  font-size: 16px;
-  color: white;
-}
-
-.arrow {
-  font-size: 12px;
-  color: black;
-}
-
 .options {
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
+  width: 100%; // Устанавливаем ширину равной родителю, чтобы не выходила за пределы
   max-height: 200px;
-  overflow-y: auto;
+  overflow-y: auto; // Добавляем прокрутку при необходимости
   padding: 0;
   border: 2px solid $disabled-color;
   border-radius: 4px;
