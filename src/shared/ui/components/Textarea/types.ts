@@ -1,12 +1,14 @@
-import { FC } from "react";
+import { TextareaHTMLAttributes } from "react";
 
-export interface TextareaProps {
-  placeholder?: string;
+export type DescriptionType = "info" | "warning" | "error" | "success";
+
+export interface TextareaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   rows?: number;
   cols?: number;
   label?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  description?: {
+    message?: string;
+    type?: DescriptionType;
+  };
 }
-
-export type TextareaType = FC<TextareaProps>;

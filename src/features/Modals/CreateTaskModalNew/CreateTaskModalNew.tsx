@@ -35,8 +35,37 @@ export const CreateTaskModalNew = () => {
             maxLength: { value: 50, message: "Максимум 50 символов" },
           })}
         />
-        <Textarea label="Описание" placeholder="Опишите детали задачи" />
-        <DatePicker />
+        <Textarea
+          label="Описание"
+          placeholder="Опишите детали задачи"
+          description={{
+            message: errors?.description?.message,
+            type: errors?.description?.message ? "error" : "info",
+          }}
+          {...register("description", {
+            required: "Описание задачи обязательно",
+          })}
+        />
+        <DatePicker
+          label="Дата начала"
+          description={{
+            message: errors?.startDate?.message,
+            type: errors?.startDate?.message ? "error" : "info",
+          }}
+          {...register("startDate", {
+            required: "Выберите дату начала задачи",
+          })}
+        />
+        <DatePicker
+          label="Дата окончания"
+          description={{
+            message: errors?.endDate?.message,
+            type: errors?.endDate?.message ? "error" : "info",
+          }}
+          {...register("endDate", {
+            required: "Выберите дату окончания задачи",
+          })}
+        />
         <Input
           label="Длительность"
           placeholder="Напишите длительность задачи"

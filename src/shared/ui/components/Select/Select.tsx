@@ -1,56 +1,74 @@
-import React, { useState } from "react";
+import { forwardRef, useState } from "react";
 import styles from "./Select.module.scss";
 import { SelectProps } from "./types";
-import { Dropdown } from "../Dropdown";
 
-export const Select: React.FC<SelectProps> = ({
-  options,
-  placeholder = "Select an option",
-  disabled = false,
-  onChange,
-  value,
-  label,
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  (
+    {
+      label,
+      options,
+      disabled = false,
+      description,
+      value,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    const [focus, setFocus] = useState(false);
+    const [hover, setHover] = useState(false);
 
-  const toggleDropdown = () => {
-    if (!disabled) {
-      setIsOpen((prev) => !prev);
-    }
-  };
+    // Устанавливаем стиль бордера в зависимости от состояния
+    const border = disabled
+      ? styles.disabled
+      : description?.type === "error"
+      ? styles.select_error
+      : description?.type === "warning"
+      ? styles.select_warning
+      : focus || hover
+      ? styles.primary_border
+      : "";
 
-  const handleOptionClick = (option: string) => {
-    onChange(option); // Управляем значением через onChange
-    setIsOpen(false);
-  };
-
-  return (
-    <div className={styles.wrapper}>
-      {label && <label className={styles.label}>{label}</label>}
-      <div
-        className={`${styles.select} ${isOpen ? styles.open : ""} ${
-          disabled ? styles.disabled : ""
-        }`}
-        onClick={toggleDropdown}
-      >
-        <span className={styles.selected}>{value || placeholder}</span>
-        <span className={styles.arrow}>{isOpen ? "▲" : "▼"}</span>
+    return (
+      <div className={styles.wrapper}>
+        {label && <label className={styles.label}>{label}</label>}
+        <div
+          className={`${styles.container} ${border}`}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <select
+            ref={ref}
+            className={styles.select}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            disabled={disabled}
+            value={value}
+            onChange={onChange}
+            {...props}
+          >
+            <option value="" disabled>
+              Выберите значение
+            </option>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        {description?.message && (
+          <div
+            className={`${styles.description} ${
+              styles[description?.type || "info"]
+            }`}
+          >
+            {description.message}
+          </div>
+        )}
       </div>
-      <Dropdown isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <ul className={styles.options}>
-          {options.map((option) => (
-            <li
-              key={option}
-              className={`${styles.option} ${
-                value === option ? styles.selectedOption : ""
-              }`}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      </Dropdown>
-    </div>
-  );
-};
+    );
+  }
+);
+
+Select.displayName = "Select";
