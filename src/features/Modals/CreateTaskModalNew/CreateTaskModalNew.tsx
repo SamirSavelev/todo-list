@@ -1,4 +1,4 @@
-import { Input, Text } from "@shared/ui/components";
+import { DatePicker, Input, Text, Textarea } from "@shared/ui/components";
 import styles from "./CreateTaskModalNew.module.scss";
 import { useForm } from "react-hook-form";
 import { TaskFormInterface } from "./types";
@@ -34,6 +34,14 @@ export const CreateTaskModalNew = () => {
             required: "Название задачи обязательно",
             maxLength: { value: 50, message: "Максимум 50 символов" },
           })}
+        />
+        <Textarea label="Описание" placeholder="Опишите детали задачи" />
+        <DatePicker />
+        <Input
+          label="Длительность"
+          placeholder="Напишите длительность задачи"
+          type="number"
+          {...register("duration")}
         />
         <button type="submit">Создать задачу</button>
       </form>

@@ -6,3 +6,4 @@ export { Dropdown } from "./Dropdown";
 export { Textarea } from "./Textarea";
 export { Select } from "./Select";
 export { Text } from "./Text";
+export { DatePicker } from "./DatePicker";

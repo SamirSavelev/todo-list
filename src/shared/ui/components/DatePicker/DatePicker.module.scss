@@ -1,0 +1,71 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid $disabled-color;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+
+  .input {
+    width: 100%;
+    &::placeholder {
+      color: $disabled-color;
+    }
+    &:disabled {
+      background-color: $disabled-color;
+      border-color: $disabled-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.disabled {
+  background-color: $disabled-color;
+  border-color: $disabled-color;
+  cursor: not-allowed;
+}
+
+.primary_border {
+  outline: none;
+  border-color: $primary-color;
+}
+
+.input_error {
+  border-color: $error-color;
+}
+
+.input_warning {
+  border-color: $warning-color;
+}
+
+.description {
+  font-size: 14px;
+  margin-top: 10px;
+  &.info {
+    opacity: 0.5;
+  }
+  &.warning {
+    color: $warning-color;
+  }
+  &.error {
+    color: $error-color;
+  }
+  &.success {
+    color: $success-color;
+  }
+}
