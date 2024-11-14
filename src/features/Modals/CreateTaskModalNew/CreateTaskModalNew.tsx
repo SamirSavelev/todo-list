@@ -1,4 +1,5 @@
 import {
+  Button,
   DatePicker,
   Input,
   Select,
@@ -7,7 +8,7 @@ import {
 } from "@shared/ui/components";
 import styles from "./CreateTaskModalNew.module.scss";
 import { useForm, Controller } from "react-hook-form";
-import { TaskFormInterface } from "./types";
+import { CreateTaskModalNewType, TaskFormInterface } from "./types";
 
 const options = [
   { label: "Фитнес", value: "1" },
@@ -15,22 +16,22 @@ const options = [
   { label: "Домашние дела", value: "3" },
 ];
 
-export const CreateTaskModalNew = () => {
+export const CreateTaskModalNew: CreateTaskModalNewType = ({
+  onClose,
+  onSave,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm<TaskFormInterface>();
-
-  const onSubmit = (data: TaskFormInterface) => {
-    console.log("форма", data);
-  };
 
   return (
     <div className={styles.container}>
       <Text variant="h3">Создание задачи</Text>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <form onSubmit={handleSubmit(onSave)} className={styles.form}>
         <Input
           label="Название"
           placeholder="Придумайте название"
@@ -97,7 +98,20 @@ export const CreateTaskModalNew = () => {
           type="number"
           {...register("duration")}
         />
-        <button type="submit">Создать задачу</button>
+        <div className={styles.button_container}>
+          <Button
+            type="primary"
+            onClick={() => {
+              reset();
+              onClose();
+            }}
+          >
+            Отменить
+          </Button>
+          <Button type="primary" buttonType="submit">
+            Сохранить
+          </Button>
+        </div>
       </form>
     </div>
   );

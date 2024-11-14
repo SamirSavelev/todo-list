@@ -3,20 +3,17 @@ import styles from "./ProjectsPage.module.scss";
 import { Button } from "@shared/ui/components/Button/Button";
 import { useState } from "react";
 import { CreateTaskModalNew } from "src/features/Modals";
+import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
 // import { CreateTaskModal } from "src/features/Modal/CreateTaskModal";
 
 export const ProjectsPage = () => {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
-  // const [isModalOpen, setModalOpen] = useState(false);
 
-  // const handleSave = (taskName: string) => {
-  //   console.log("Сохранено название задачи:", taskName); // Можно сохранить в state или отправить в API
-  //   setModalOpen(false); // Закрываем модал после сохранения
-  // };
+  const saveTaskHandler = (form: TaskFormInterface) => {
+    console.log("Сохранено название задачи:", form);
+    setCreateTaskModalOpen(false);
+  };
 
-  // const handleClose = () => {
-  //   setModalOpen(false); // Закрываем модал без сохранения
-  // };
   const openCreateTaskModal = () => {
     setCreateTaskModalOpen(true);
   };
@@ -32,7 +29,10 @@ export const ProjectsPage = () => {
           Создать задачу
         </Button>
         <Modal isOpen={isCreateTaskModalOpen} onClose={closeCreateTaskModal}>
-          <CreateTaskModalNew />
+          <CreateTaskModalNew
+            onSave={saveTaskHandler}
+            onClose={closeCreateTaskModal}
+          />
         </Modal>
         {/* <Modal isOpen={isModalOpen} onClose={handleClose}>
           <CreateTaskModal onClose={handleClose} onSave={handleSave} />

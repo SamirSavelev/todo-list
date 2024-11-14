@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect, forwardRef } from "react";
+import { useState, useRef, forwardRef } from "react";
 import { Input } from "../Input/Input";
 import styles from "./Select.module.scss";
 import { SelectProps, Option } from "./types";
 import { IoIosArrowDown } from "react-icons/io";
+import { useOutsideClick } from "@shared/hooks";
 
 export const Select = forwardRef<HTMLInputElement, SelectProps>(
   (
@@ -28,20 +29,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
       setIsOpen(false);
     };
 
-    // Закрытие списка при клике вне компонента
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target as Node)
-        ) {
-          setIsOpen(false);
-        }
-      };
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    useOutsideClick(dropdownRef, () => setIsOpen(false));
 
     return (
       <div className={styles.wrapper}>
