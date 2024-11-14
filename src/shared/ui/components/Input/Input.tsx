@@ -13,6 +13,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       onChange,
       description,
+      onClick,
+      labelClassName = "",
+      inputClassName = "",
       ...props
     },
     ref
@@ -32,11 +35,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={styles.wrapper}>
-        {label && <label className={styles.label}>{label}</label>}
+        {label && (
+          <label className={`${styles.label} ${labelClassName}`}>{label}</label>
+        )}
         <div
-          className={`${styles.container} ${styles[inputSize]} ${border}`}
+          className={`${styles.container} ${styles[inputSize]} ${border} ${inputClassName}`}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
+          onClick={onClick}
         >
           {inputPrefix}
           <input

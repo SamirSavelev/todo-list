@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, forwardRef } from "react";
 import { Input } from "../Input/Input";
 import styles from "./Select.module.scss";
 import { SelectProps, Option } from "./types";
+import { IoIosArrowDown } from "react-icons/io";
 
 export const Select = forwardRef<HTMLInputElement, SelectProps>(
   (
@@ -44,7 +45,6 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
 
     return (
       <div className={styles.wrapper}>
-        {label && <label className={styles.label}>{label}</label>}
         <div className={styles.container} ref={dropdownRef}>
           <Input
             {...props}
@@ -53,7 +53,12 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
             onClick={() => setIsOpen(!isOpen)}
             readOnly
             disabled={disabled}
-            description={description}
+            inputSuffix={<IoIosArrowDown />}
+            description={{
+              type: description?.type,
+            }}
+            inputClassName={styles.input}
+            label={label}
           />
           {isOpen && (
             <div className={styles.dropdown}>
@@ -69,6 +74,15 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
             </div>
           )}
         </div>
+        {description?.message && (
+          <div
+            className={`${styles.description} ${
+              styles[description?.type || "info"]
+            }`}
+          >
+            {description.message}
+          </div>
+        )}
       </div>
     );
   }

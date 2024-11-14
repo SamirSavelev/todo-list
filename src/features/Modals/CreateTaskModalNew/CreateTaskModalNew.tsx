@@ -10,9 +10,9 @@ import { useForm, Controller } from "react-hook-form";
 import { TaskFormInterface } from "./types";
 
 const options = [
-  { label: "Опция 1", value: "1" },
-  { label: "Опция 2", value: "2" },
-  { label: "Опция 3", value: "3" },
+  { label: "Фитнес", value: "1" },
+  { label: "Учеба", value: "2" },
+  { label: "Домашние дела", value: "3" },
 ];
 
 export const CreateTaskModalNew = () => {
@@ -77,15 +77,17 @@ export const CreateTaskModalNew = () => {
         <Controller
           name="select"
           control={control}
+          // rules={{ required: "Поле обязательно для выбора" }}
           render={({ field }) => (
             <Select
-              label="Выберите значение"
+              label="Проект"
+              placeholder="Выберите проект"
               options={options}
               {...field}
-              description={{
-                type: "error",
-                message: "Поле обязательно для выбора",
-              }}
+              // description={{
+              //   message: errors?.select?.message,
+              //   type: errors?.select ? "error" : "info",
+              // }}
             />
           )}
         />

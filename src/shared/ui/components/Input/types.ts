@@ -11,6 +11,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     message?: string;
     type?: DescriptionType;
   };
+  labelClassName?: string;
+  inputClassName?: string;
 }
 
 export type InputType = FC<InputProps>;
