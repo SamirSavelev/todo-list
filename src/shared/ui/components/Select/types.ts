@@ -1,20 +1,21 @@
-import { FC, SelectHTMLAttributes } from "react";
-
-export type DescriptionType = "info" | "warning" | "error" | "success";
+import { InputHTMLAttributes, FC, ChangeEvent } from "react";
 
 export interface Option {
   label: string;
   value: string;
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export type DescriptionType = "info" | "warning" | "error" | "success";
+
+export interface SelectProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: string;
   options: Option[];
-  placeholder?: string;
   description?: {
     message?: string;
     type?: DescriptionType;
   };
+  onChange?: (event: ChangeEvent<HTMLInputElement> | string) => void; // Изменяем тип на совместимый
 }
 
 export type SelectType = FC<SelectProps>;

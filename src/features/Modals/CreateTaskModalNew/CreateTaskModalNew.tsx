@@ -1,23 +1,31 @@
-import { DatePicker, Input, Text, Textarea } from "@shared/ui/components";
+import {
+  DatePicker,
+  Input,
+  Select,
+  Text,
+  Textarea,
+} from "@shared/ui/components";
 import styles from "./CreateTaskModalNew.module.scss";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { TaskFormInterface } from "./types";
-import { useEffect } from "react";
+
+const options = [
+  { label: "Опция 1", value: "1" },
+  { label: "Опция 2", value: "2" },
+  { label: "Опция 3", value: "3" },
+];
 
 export const CreateTaskModalNew = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<TaskFormInterface>();
 
   const onSubmit = (data: TaskFormInterface) => {
     console.log("форма", data);
   };
-
-  useEffect(() => {
-    console.log("errors", errors);
-  }, [errors]);
 
   return (
     <div className={styles.container}>
@@ -65,6 +73,21 @@ export const CreateTaskModalNew = () => {
           {...register("endDate", {
             required: "Выберите дату окончания задачи",
           })}
+        />
+        <Controller
+          name="select"
+          control={control}
+          render={({ field }) => (
+            <Select
+              label="Выберите значение"
+              options={options}
+              {...field}
+              description={{
+                type: "error",
+                message: "Поле обязательно для выбора",
+              }}
+            />
+          )}
         />
         <Input
           label="Длительность"

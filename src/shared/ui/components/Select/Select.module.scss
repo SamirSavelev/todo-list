@@ -10,60 +10,54 @@
 }
 
 .container {
-  display: flex;
-  align-items: center;
+  position: relative;
   width: 100%;
-  padding: 10px;
-  border: 2px solid $disabled-color;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  border: 1px solid $disabled-color;
   border-radius: 4px;
-  font-family: inherit;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  padding: 10px;
   font-size: 16px;
-  transition: border-color 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 
-  .select {
-    width: 100%;
-    background-color: transparent;
-    font-size: inherit;
-    font-family: inherit;
-    border: none;
-    outline: none;
-    appearance: none; // Скрывает стандартную стрелку в большинстве браузеров
-    color: $text-color-light;
-
-    &:disabled {
-      background-color: $disabled-color;
-      color: $disabled-color;
-      cursor: not-allowed;
-    }
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
   }
-
-  .select::-ms-expand {
-    display: none; // Скрывает стрелку в IE и Edge
-  }
-}
-
-.primary_border {
-  outline: none;
-  border-color: $primary-color;
-}
-
-.select_error {
-  border-color: $error-color;
-}
-
-.select_warning {
-  border-color: $warning-color;
-}
-
-.disabled {
-  background-color: $disabled-color;
-  border-color: $disabled-color;
-  cursor: not-allowed;
 }
 
 .description {
   font-size: 14px;
   margin-top: 10px;
+
   &.info {
     opacity: 0.5;
   }
