@@ -41,10 +41,12 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
             onClick={() => setIsOpen(!isOpen)}
             readOnly
             disabled={disabled}
-            inputSuffix={<IoIosArrowDown />}
-            description={{
-              type: description?.type,
-            }}
+            inputSuffix={
+              <IoIosArrowDown
+                className={`${styles.arrow} ${isOpen && styles.arrow__isOpen}`}
+              />
+            }
+            description={{ type: description?.type }}
             inputClassName={styles.input}
             label={label}
           />

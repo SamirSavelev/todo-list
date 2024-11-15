@@ -4,7 +4,6 @@ import { Button } from "@shared/ui/components/Button/Button";
 import { useState } from "react";
 import { CreateTaskModalNew } from "src/features/Modals";
 import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
-// import { CreateTaskModal } from "src/features/Modal/CreateTaskModal";
 
 export const ProjectsPage = () => {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -34,9 +33,6 @@ export const ProjectsPage = () => {
             onClose={closeCreateTaskModal}
           />
         </Modal>
-        {/* <Modal isOpen={isModalOpen} onClose={handleClose}>
-          <CreateTaskModal onClose={handleClose} onSave={handleSave} />
-        </Modal> */}
       </div>
     </div>
   );

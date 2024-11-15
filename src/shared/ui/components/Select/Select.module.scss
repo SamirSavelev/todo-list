@@ -75,3 +75,11 @@
 .input {
   cursor: pointer;
 }
+
+.arrow {
+  transition: all 0.2s ease-in-out;
+
+  &__isOpen {
+    transform: rotate(180deg);
+  }
+}
