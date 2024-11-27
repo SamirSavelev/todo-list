@@ -6,6 +6,7 @@
   --switch-slider-shadow: #{$switch-slider-light-shadow};
   --switch-text-active: #{$switch-text-light-active};
   --switch-text-inactive: #{$switch-text-light-inactive};
+  --project-page-filters-selected-item: #{$project-page-filters-selected-item-light};
 }
 
 .dark {
@@ -16,6 +17,7 @@
   --switch-slider-shadow: #{$switch-slider-dark-shadow};
   --switch-text-active: #{$switch-text-dark-active};
   --switch-text-inactive: #{$switch-text-dark-inactive};
+  --project-page-filters-selected-item: #{$project-page-filters-selected-item-dark};
 }
 
 body {

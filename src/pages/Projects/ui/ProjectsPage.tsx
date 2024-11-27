@@ -10,8 +10,7 @@ import { ProjectListType, TaskListType } from "../data/types";
 import { mockProjectsList, mockTasksList } from "../data/mocks";
 
 export const ProjectsPage = () => {
-  const [projectsList, setProjectsList] =
-    useState<ProjectListType>(mockProjectsList);
+  const [projectsList] = useState<ProjectListType>(mockProjectsList);
   const [tasksList, setTasksList] = useState<TaskListType>(mockTasksList);
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -31,7 +30,7 @@ export const ProjectsPage = () => {
 
   return (
     <div className={styles.container}>
-      <Filters />
+      <Filters projects={projectsList} />
       <Tasks />
 
       {/* <div className={styles.settings}>
