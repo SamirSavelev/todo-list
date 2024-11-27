@@ -1,11 +1,19 @@
 import { Modal } from "@shared/ui/components/Modal/Modal";
-import styles from "./ProjectsPage.module.scss";
+import styles from "../styles/ProjectsPage.module.scss";
 import { Button } from "@shared/ui/components/Button/Button";
 import { useState } from "react";
 import { CreateTaskModalNew } from "src/features/Modals";
 import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
+import { Filters } from "./Filters";
+import { Tasks } from "./Tasks";
+import { ProjectListType, TaskListType } from "../data/types";
+import { mockProjectsList, mockTasksList } from "../data/mocks";
 
 export const ProjectsPage = () => {
+  const [projectsList, setProjectsList] =
+    useState<ProjectListType>(mockProjectsList);
+  const [tasksList, setTasksList] = useState<TaskListType>(mockTasksList);
+
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
 
   const saveTaskHandler = (form: TaskFormInterface) => {
@@ -23,7 +31,10 @@ export const ProjectsPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.settings}>
+      <Filters />
+      <Tasks />
+
+      {/* <div className={styles.settings}>
         <Button type="primary" size="small" onClick={openCreateTaskModal}>
           Создать задачу
         </Button>
@@ -33,7 +44,7 @@ export const ProjectsPage = () => {
             onClose={closeCreateTaskModal}
           />
         </Modal>
-      </div>
+      </div> */}
     </div>
   );
 };

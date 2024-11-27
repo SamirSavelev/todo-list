@@ -76,7 +76,7 @@ export const CreateTaskModalNew: CreateTaskModalNewType = ({
           })}
         />
         <Controller
-          name="select"
+          name="project"
           control={control}
           // rules={{ required: "Поле обязательно для выбора" }}
           render={({ field }) => (

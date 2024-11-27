@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
     path: "/projects",
     element: (
       <Layout>
-        <ProjectsPage />,
+        <ProjectsPage />
       </Layout>
     ),
   },
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
     path: "/profile",
     element: (
       <Layout>
-        <ProfilePage />,
+        <ProfilePage />
       </Layout>
     ),
   },
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
     path: "/settings",
     element: (
       <Layout>
-        <SettingsPage />,
+        <SettingsPage />
       </Layout>
     ),
   },

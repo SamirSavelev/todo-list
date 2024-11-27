@@ -7,3 +7,4 @@ export { Textarea } from "./Textarea";
 export { Select } from "./Select";
 export { Text } from "./Text";
 export { DatePicker } from "./DatePicker";
+export { Accordion } from "./Accordion";

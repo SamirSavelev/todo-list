@@ -6,7 +6,7 @@ export interface TaskFormInterface {
   description: string;
   startDate: string;
   endDate: string;
-  select: string;
+  project: string;
 }
 
 interface CreateTaskModalNewProps {
