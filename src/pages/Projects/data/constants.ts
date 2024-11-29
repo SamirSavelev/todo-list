@@ -1,18 +1,22 @@
-export const taskFiltersList = [
+export const taskStatusList = [
   {
-    id: 1,
-    title: "Все задачи",
-  },
-  {
-    id: 2,
+    id: "to-do",
     title: "К выполнению",
   },
   {
-    id: 3,
+    id: "in-progress",
     title: "В процессе",
   },
   {
-    id: 4,
+    id: "done",
     title: "Завершенны",
   },
+];
+
+export const taskFiltersList = [
+  {
+    id: "all",
+    title: "Все задачи",
+  },
+  ...taskStatusList,
 ];

@@ -6,10 +6,11 @@ export const Text: TextType = ({
   variant = "body1",
   as = "div",
   fontWeight,
+  style,
 }) => {
   const Tag = as;
   return (
-    <Tag className={styles[variant]} style={{ fontWeight }}>
+    <Tag className={styles[variant]} style={{ fontWeight, ...style }}>
       {children}
     </Tag>
   );

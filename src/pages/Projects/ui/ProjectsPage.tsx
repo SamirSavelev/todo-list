@@ -8,10 +8,11 @@ import { Filters } from "./Filters";
 import { Tasks } from "./Tasks";
 import { ProjectListType, TaskListType } from "../data/types";
 import { mockProjectsList, mockTasksList } from "../data/mocks";
+import { Header } from "@shared/ui/Header";
 
 export const ProjectsPage = () => {
   const [projectsList] = useState<ProjectListType>(mockProjectsList);
-  const [tasksList, setTasksList] = useState<TaskListType>(mockTasksList);
+  const [tasksList] = useState<TaskListType>(mockTasksList);
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
 
@@ -30,20 +31,22 @@ export const ProjectsPage = () => {
 
   return (
     <div className={styles.container}>
-      <Filters projects={projectsList} />
-      <Tasks />
-
-      {/* <div className={styles.settings}>
-        <Button type="primary" size="small" onClick={openCreateTaskModal}>
-          Создать задачу
-        </Button>
-        <Modal isOpen={isCreateTaskModalOpen} onClose={closeCreateTaskModal}>
-          <CreateTaskModalNew
-            onSave={saveTaskHandler}
-            onClose={closeCreateTaskModal}
-          />
-        </Modal>
-      </div> */}
+      <Filters projects={projectsList} tasks={tasksList} />
+      <div className={styles.content_container}>
+        <Header />
+        <div className={styles.settings}>
+          <Button type="primary" size="small" onClick={openCreateTaskModal}>
+            Создать задачу
+          </Button>
+          <Modal isOpen={isCreateTaskModalOpen} onClose={closeCreateTaskModal}>
+            <CreateTaskModalNew
+              onSave={saveTaskHandler}
+              onClose={closeCreateTaskModal}
+            />
+          </Modal>
+        </div>
+        <Tasks projects={projectsList} tasks={tasksList} />
+      </div>
     </div>
   );
 };

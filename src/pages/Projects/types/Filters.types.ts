@@ -1,8 +1,9 @@
 import { FC } from "react";
-import { ProjectListType } from "../data/types";
+import { ProjectListType, TaskListType } from "../data/types";
 
 interface FiltersProps {
   projects: ProjectListType;
+  tasks: TaskListType;
 }
 
 export type FiltersType = FC<FiltersProps>;
