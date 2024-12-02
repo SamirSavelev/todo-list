@@ -1,6 +1,7 @@
+// TasksBlock.tsx
 import { TasksBlockType } from "../types/TasksBlock.types";
 import styles from "../styles/TasksBlock.module.scss";
-import { Text } from "@shared/ui/components";
+import { TasksInfo, Text } from "@shared/ui/components";
 
 export const TasksBlock: TasksBlockType = ({ tasks, title }) => {
   return (
@@ -8,6 +9,11 @@ export const TasksBlock: TasksBlockType = ({ tasks, title }) => {
       <Text style={{ opacity: 0.5 }} variant="body2" fontWeight={700}>
         {title}
       </Text>
+      <div>
+        {tasks.map((task) => (
+          <TasksInfo key={task.id} task={task} />
+        ))}
+      </div>
     </div>
   );
 };
