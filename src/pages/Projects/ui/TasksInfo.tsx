@@ -1,8 +1,8 @@
 // TasksInfo.tsx
 import React from "react";
-import styles from "./TasksInfo.module.scss";
-import { TaskType } from "./types";
-import { mockProjectsList } from "../../../../pages/Projects/data/mocks";
+import styles from "../styles/TasksInfo.module.scss";
+import { TaskType } from "../types/TasksInfo.types";
+import { mockProjectsList } from "../data/mocks";
 import { ReactComponent as MenuIcon } from "@assets/icons/action-menu.svg";
 
 interface TasksInfoProps {

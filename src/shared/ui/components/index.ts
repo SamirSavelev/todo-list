@@ -8,4 +8,3 @@ export { Select } from "./Select";
 export { Text } from "./Text";
 export { DatePicker } from "./DatePicker";
 export { Accordion } from "./Accordion";
-export { TasksInfo } from "./TasksInfo";

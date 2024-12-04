@@ -5,9 +5,33 @@ import { TasksType } from "../types/Tasks.types";
 import { TasksBlock } from "./TasksBlock";
 
 export const Tasks: TasksType = ({ projects, tasks }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const isProjects = searchParams.get("project") !== null;
-  const filteredTasks = tasks;
+
+  const getFilteredTasks = () => {
+    if (isProjects) {
+      const selectedProject = searchParams.get("project");
+      if (selectedProject === "all") {
+        return tasks;
+      } else {
+        return tasks.filter(
+          ({ project }) => project?.toString() === selectedProject
+        );
+      }
+    } else {
+      const selectedStatus = searchParams.get("status");
+      if (selectedStatus === "all") {
+        return tasks;
+      } else {
+        return tasks.filter(
+          ({ status }) => status?.toString() === selectedStatus
+        );
+      }
+    }
+    return tasks;
+  };
+
+  const filteredTasks = getFilteredTasks();
 
   const blocksArray = isProjects
     ? taskStatusList.map(({ id, title }) => {
@@ -18,7 +42,7 @@ export const Tasks: TasksType = ({ projects, tasks }) => {
           tasks,
         };
       })
-    : projects.map((id, title) => {
+    : projects.map(({ id, title }) => {
         const tasks = filteredTasks.filter(({ project }) => project === id);
         return {
           id,

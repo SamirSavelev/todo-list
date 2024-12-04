@@ -1,7 +1,8 @@
 // TasksBlock.tsx
 import { TasksBlockType } from "../types/TasksBlock.types";
 import styles from "../styles/TasksBlock.module.scss";
-import { TasksInfo, Text } from "@shared/ui/components";
+import { Text } from "@shared/ui/components";
+import TasksInfo from "./TasksInfo";
 
 export const TasksBlock: TasksBlockType = ({ tasks, title }) => {
   return (
