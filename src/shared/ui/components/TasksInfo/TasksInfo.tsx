@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./TasksInfo.module.scss";
 import { TaskType } from "./types";
 import { mockProjectsList } from "../../../../pages/Projects/data/mocks";
+import { ReactComponent as MenuIcon } from "@assets/icons/action-menu.svg";
 
 interface TasksInfoProps {
   task: TaskType;
@@ -23,7 +24,10 @@ export const TasksInfo: React.FC<TasksInfoProps> = ({ task }) => {
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.taskName}>{task.name}</h3>
+      <div className={styles.icon}>
+        <h3 className={styles.taskName}>{task.name}</h3>
+        <MenuIcon />
+      </div>
       <p className={styles.taskProject}>Проект: {projectTitle}</p>
       <p className={styles.taskStatus}>Статус: {statusText}</p>
       <p className={styles.taskEndDate}>Дата окончания: {task.endDate}</p>
