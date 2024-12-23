@@ -1,9 +1,10 @@
 import { FC } from "react";
-import { TaskListType } from "../data/types";
+import { ProjectListType, TaskListType } from "../data/types";
 
 interface TasksBlockProps {
   title: string;
   tasks: TaskListType;
+  projects: ProjectListType;
 }
 
 export type TasksBlockType = FC<TasksBlockProps>;

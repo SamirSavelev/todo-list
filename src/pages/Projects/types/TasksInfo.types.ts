@@ -1,15 +1,23 @@
-export interface TaskType {
-  id: number;
-  status: string;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  project?: number; // ID проекта
-  duration?: number;
-}
+import { FC } from "react";
+import { TaskInterface } from "../data/types";
 
-export interface ProjectType {
-  id: number;
-  title: string;
+interface TaskInfoProps extends TaskInterface {
+  projectName: string;
 }
+export type TaskInfoType = FC<TaskInfoProps>;
+
+// export interface TaskType {
+//   id: number;
+//   status: string;
+//   name: string;
+//   description: string;
+//   startDate: string;
+//   endDate: string;
+//   project?: number; // ID проекта
+//   duration?: number;
+// }
+
+// export interface ProjectType {
+//   id: number;
+//   title: string;
+// }

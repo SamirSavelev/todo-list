@@ -54,7 +54,7 @@ export const Tasks: TasksType = ({ projects, tasks }) => {
   return (
     <div className={styles.container}>
       {blocksArray.map(({ id, title, tasks }) => (
-        <TasksBlock key={id} tasks={tasks} title={title} />
+        <TasksBlock projects={projects} key={id} tasks={tasks} title={title} />
       ))}
     </div>
   );

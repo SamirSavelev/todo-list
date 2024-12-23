@@ -1,51 +1,74 @@
 .container {
-  box-sizing: border-box;
-  height: 178px;
-  width: 320px;
-  flex-shrink: 0;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
   border-radius: 12px;
   border: 2px solid rgba(28, 29, 34, 0.06);
   padding: 20px;
-  margin: 0;
-  background-color: transparent;
 }
 
-.taskName {
-  color: #1c1d22;
-  font-family: "Exo 2";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%;
-  margin-bottom: 10px; /* 16px */
-}
-
-.taskProject,
-.taskStatus {
-  color: rgba(28, 29, 34, 0.5);
-  font-family: "Exo 2";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 100%;
-  margin-bottom: 10px; /* 14px */
-}
-
-.taskEndDate {
-  color: #888da7;
-  font-family: "Exo 2";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 100%; /* 14px */
-  border-radius: 17px;
-  background: rgba(136, 141, 167, 0.1);
-  padding: 8px 16px;
-}
-
-.icon {
+.header {
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// .container {
+//   box-sizing: border-box;
+//   height: 178px;
+//   width: 320px;
+//   flex-shrink: 0;
+//   background-color: #fff;
+//   border-radius: 12px;
+//   border: 2px solid rgba(28, 29, 34, 0.06);
+//   padding: 20px;
+//   margin: 0;
+//   background-color: transparent;
+// }
+
+// .taskName {
+//   color: #1c1d22;
+//   font-family: "Exo 2";
+//   font-size: 16px;
+//   font-style: normal;
+//   font-weight: 700;
+//   line-height: 100%;
+//   margin-bottom: 10px; /* 16px */
+// }
+
+// .taskProject,
+// .taskStatus {
+//   color: rgba(28, 29, 34, 0.5);
+//   font-family: "Exo 2";
+//   font-size: 14px;
+//   font-style: normal;
+//   font-weight: 500;
+//   line-height: 100%;
+//   margin-bottom: 10px; /* 14px */
+// }
+
+// .taskEndDate {
+//   color: #888da7;
+//   font-family: "Exo 2";
+//   font-size: 14px;
+//   font-style: normal;
+//   font-weight: 600;
+//   line-height: 100%; /* 14px */
+//   border-radius: 17px;
+//   background: rgba(136, 141, 167, 0.1);
+//   padding: 8px 16px;
+// }
+
+// .icon {
+//   display: flex;
+//   justify-content: space-between;
+//   flex-direction: row;
+// }

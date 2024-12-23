@@ -8,3 +8,10 @@
   border: 2px dashed rgba(28, 29, 34, 0.08);
   padding: 24px 16px 16px;
 }
+
+.task_list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 14px;
+}

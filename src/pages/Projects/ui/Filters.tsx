@@ -4,6 +4,7 @@ import styles from "../styles/Filters.module.scss";
 import { FiltersType } from "../types/Filters.types";
 import { useSearchParams } from "react-router-dom";
 import { taskFiltersList } from "../data/constants";
+import { useEffect } from "react";
 
 export const Filters: FiltersType = ({ projects, tasks }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -32,6 +33,15 @@ export const Filters: FiltersType = ({ projects, tasks }) => {
 
   const selectedProjectId = searchParams.get("project");
   const selectedTaskStatusId = searchParams.get("status");
+
+  useEffect(() => {
+    if (!selectedProjectId && !selectedTaskStatusId) {
+      setSearchParams({
+        ...searchParams,
+        project: "all",
+      });
+    }
+  }, [selectedProjectId, selectedTaskStatusId, searchParams, setSearchParams]);
 
   return (
     <div className={styles.container}>
