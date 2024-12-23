@@ -31,7 +31,7 @@ export const ProjectsPage = () => {
 
   return (
     <div className={styles.container}>
-      {/* <Filters projects={projectsList} tasks={tasksList} /> */}
+      <Filters projects={projectsList} tasks={tasksList} />
       <div className={styles.content_container}>
         <Header />
         <div className={styles.settings}>
