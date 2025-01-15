@@ -2,15 +2,24 @@ import { TaskInfoType } from "../types/TasksInfo.types";
 import styles from "../styles/TasksInfo.module.scss";
 import { ReactComponent as MoreIcon } from "@assets/icons/more.svg";
 import { Text } from "@shared/ui/components";
+import { taskStatusList } from "../data/constants";
 
-export const TasksInfo: TaskInfoType = ({ name, project, projectName }) => {
+export const TasksInfo: TaskInfoType = ({
+  name,
+  projectName,
+  status,
+  endDate,
+}) => {
+  const statusName =
+    taskStatusList.find((item) => item.id === status)?.title || "";
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.main}>
           <Text fontWeight={700}>{name}</Text>
           <Text style={{ opacity: 0.5 }}>{projectName}</Text>
-          <Text>Статус:</Text>
+          <Text>Статус: {statusName}</Text>
+          <Text>{endDate}</Text>
         </div>
         <div>
           <MoreIcon />

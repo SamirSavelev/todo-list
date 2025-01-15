@@ -9,7 +9,7 @@ export const taskStatusList = [
   },
   {
     id: "done",
-    title: "Завершенны",
+    title: "Завершено",
   },
 ];
 
