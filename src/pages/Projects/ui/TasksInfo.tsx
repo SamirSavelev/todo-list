@@ -10,8 +10,11 @@ export const TasksInfo: TaskInfoType = ({ name, project, projectName }) => {
         <div className={styles.main}>
           <Text fontWeight={700}>{name}</Text>
           <Text style={{ opacity: 0.5 }}>{projectName}</Text>
+          <Text>Статус:</Text>
         </div>
-        <MoreIcon />
+        <div>
+          <MoreIcon />
+        </div>
       </div>
     </div>
   );
