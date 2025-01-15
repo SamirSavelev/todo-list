@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ReactComponent as SunIcon } from "@assets/icons/sun.svg";
 import { ReactComponent as MoonIcon } from "@assets/icons/moon.svg";
 import styles from "./ThemeSwitch.module.scss";
+import { useTheme } from "@app/providers/ThemeProvider/ThemeContext";
 
 type ThemeType = "light" | "dark";
 
 export const ThemeSwitch = () => {
-  const [theme, setTheme] = useState<ThemeType>("dark");
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const localTheme = localStorage.getItem("theme") as ThemeType;
@@ -17,7 +18,7 @@ export const ThemeSwitch = () => {
     }
 
     document.body.className = theme;
-  }, [theme]);
+  }, [theme, setTheme]);
 
   const toggleTheme = () => {
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");

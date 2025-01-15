@@ -5,6 +5,7 @@ import { ReactComponent as MoreIconDark } from "@assets/icons/more_dark.svg";
 import { Text } from "@shared/ui/components";
 import { taskStatusList } from "../data/constants";
 import moment from "moment";
+import { useTheme } from "@app/providers/ThemeProvider/ThemeContext";
 
 export const TasksInfo: TaskInfoType = ({
   name,
@@ -12,10 +13,15 @@ export const TasksInfo: TaskInfoType = ({
   status,
   endDate,
 }) => {
+  const { theme } = useTheme();
   const statusName =
     taskStatusList.find((item) => item.id === status)?.title || "";
 
   const deadline = moment(endDate).format("DD MMM YYYY");
+
+  const isLight = theme === "light";
+
+  const MoreIcon = isLight ? MoreIconLight : MoreIconDark;
 
   return (
     <div className={styles.container}>
@@ -31,7 +37,7 @@ export const TasksInfo: TaskInfoType = ({
           </div>
         </div>
         <div>
-          <MoreIconLight />
+          <MoreIcon />
         </div>
       </div>
     </div>
