@@ -7,6 +7,8 @@
   --switch-text-active: #{$switch-text-light-active};
   --switch-text-inactive: #{$switch-text-light-inactive};
   --project-page-filters-selected-item: #{$project-page-filters-selected-item-light};
+  --task-date-bg: #{$task-date-bg-light};
+  --task-date-text: #{$task-date-text-light};
 }
 
 .dark {
@@ -18,6 +20,8 @@
   --switch-text-active: #{$switch-text-dark-active};
   --switch-text-inactive: #{$switch-text-dark-inactive};
   --project-page-filters-selected-item: #{$project-page-filters-selected-item-dark};
+  --task-date-bg: #{$task-date-bg-dark};
+  --task-date-text: #{$task-date-text-dark};
 }
 
 body {

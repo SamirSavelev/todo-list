@@ -21,6 +21,16 @@
   gap: 20px;
 }
 
+.deadline {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  padding: 8px 16px;
+  border-radius: 17px;
+  width: max-content;
+  background: var(--task-date-bg);
+  color: var(--task-date-text);
+}
 // .container {
 //   box-sizing: border-box;
 //   height: 178px;
