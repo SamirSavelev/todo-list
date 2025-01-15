@@ -1,6 +1,7 @@
 import { TaskInfoType } from "../types/TasksInfo.types";
 import styles from "../styles/TasksInfo.module.scss";
-import { ReactComponent as MoreIcon } from "@assets/icons/more.svg";
+import { ReactComponent as MoreIconLight } from "@assets/icons/more.svg";
+import { ReactComponent as MoreIconDark } from "@assets/icons/more_dark.svg";
 import { Text } from "@shared/ui/components";
 import { taskStatusList } from "../data/constants";
 import moment from "moment";
@@ -15,6 +16,7 @@ export const TasksInfo: TaskInfoType = ({
     taskStatusList.find((item) => item.id === status)?.title || "";
 
   const deadline = moment(endDate).format("DD MMM YYYY");
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -29,7 +31,7 @@ export const TasksInfo: TaskInfoType = ({
           </div>
         </div>
         <div>
-          <MoreIcon />
+          <MoreIconLight />
         </div>
       </div>
     </div>
