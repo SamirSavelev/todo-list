@@ -2,16 +2,19 @@ import { TaskInfoType } from "../types/TasksInfo.types";
 import styles from "../styles/TasksInfo.module.scss";
 import { ReactComponent as MoreIconLight } from "@assets/icons/more.svg";
 import { ReactComponent as MoreIconDark } from "@assets/icons/more_dark.svg";
-import { Text } from "@shared/ui/components";
-import { taskStatusList } from "../data/constants";
+import { Dropdown, Text } from "@shared/ui/components";
+import { taskInfoDropdownOptions, taskStatusList } from "../data/constants";
 import moment from "moment";
 import { useTheme } from "@app/providers/ThemeProvider/ThemeContext";
 
 export const TasksInfo: TaskInfoType = ({
-  name,
+  deleteTask,
+  editTask,
   projectName,
+  name,
   status,
   endDate,
+  id,
 }) => {
   const { theme } = useTheme();
   const statusName =
@@ -22,6 +25,14 @@ export const TasksInfo: TaskInfoType = ({
   const isLight = theme === "light";
 
   const MoreIcon = isLight ? MoreIconLight : MoreIconDark;
+
+  const onSelect = (option: string) => {
+    if (option === "edit") {
+      editTask(id.toString());
+    } else if (option === "delete") {
+      deleteTask(id.toString());
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -37,7 +48,15 @@ export const TasksInfo: TaskInfoType = ({
           </div>
         </div>
         <div>
-          <MoreIcon />
+          <Dropdown
+            options={taskInfoDropdownOptions}
+            onSelect={onSelect}
+            position="bottom"
+          >
+            <div>
+              <MoreIcon />
+            </div>
+          </Dropdown>
         </div>
       </div>
     </div>

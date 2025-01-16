@@ -4,7 +4,12 @@ import styles from "../styles/TasksBlock.module.scss";
 import { Text } from "@shared/ui/components";
 import { TasksInfo } from "./TasksInfo";
 
-export const TasksBlock: TasksBlockType = ({ tasks, projects, title }) => {
+export const TasksBlock: TasksBlockType = ({
+  tasks,
+  projects,
+  title,
+  ...props
+}) => {
   return (
     <div className={styles.container}>
       <Text style={{ opacity: 0.5 }} variant="body2" fontWeight={700}>
@@ -18,6 +23,7 @@ export const TasksBlock: TasksBlockType = ({ tasks, projects, title }) => {
             }
             key={task.id}
             {...task}
+            {...props}
           />
         ))}
       </div>

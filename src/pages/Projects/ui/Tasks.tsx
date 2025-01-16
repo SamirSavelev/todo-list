@@ -4,7 +4,7 @@ import styles from "../styles/Tasks.module.scss";
 import { TasksType } from "../types/Tasks.types";
 import { TasksBlock } from "./TasksBlock";
 
-export const Tasks: TasksType = ({ projects, tasks }) => {
+export const Tasks: TasksType = ({ projects, tasks, ...props }) => {
   const [searchParams] = useSearchParams();
   const isProjects = searchParams.get("project") !== null;
 
@@ -54,7 +54,13 @@ export const Tasks: TasksType = ({ projects, tasks }) => {
   return (
     <div className={styles.container}>
       {blocksArray.map(({ id, title, tasks }) => (
-        <TasksBlock projects={projects} key={id} tasks={tasks} title={title} />
+        <TasksBlock
+          projects={projects}
+          key={id}
+          tasks={tasks}
+          title={title}
+          {...props}
+        />
       ))}
     </div>
   );

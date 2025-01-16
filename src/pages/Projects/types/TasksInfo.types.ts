@@ -3,6 +3,8 @@ import { TaskInterface } from "../data/types";
 
 interface TaskInfoProps extends TaskInterface {
   projectName: string;
+  deleteTask(id: number): void;
+  editTask(id: number): void;
 }
 export type TaskInfoType = FC<TaskInfoProps>;
 

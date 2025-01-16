@@ -1,3 +1,5 @@
+import { Option } from "@shared/ui/components/Dropdown/types";
+
 export const taskStatusList = [
   {
     id: "to-do",
@@ -19,4 +21,15 @@ export const taskFiltersList = [
     title: "Все задачи",
   },
   ...taskStatusList,
+];
+
+export const taskInfoDropdownOptions: Array<Option> = [
+  {
+    value: "edit",
+    label: "Редактировать",
+  },
+  {
+    value: "delete",
+    label: "Удалить",
+  },
 ];

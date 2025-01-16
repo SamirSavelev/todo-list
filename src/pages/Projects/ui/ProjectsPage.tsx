@@ -12,7 +12,7 @@ import { Header } from "@shared/ui/Header";
 
 export const ProjectsPage = () => {
   const [projectsList] = useState<ProjectListType>(mockProjectsList);
-  const [tasksList] = useState<TaskListType>(mockTasksList);
+  const [tasksList, setTasksList] = useState<TaskListType>(mockTasksList);
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
 
@@ -27,6 +27,15 @@ export const ProjectsPage = () => {
 
   const closeCreateTaskModal = () => {
     setCreateTaskModalOpen(false);
+  };
+
+  const deleteTaskHandler = (id: number) => {
+    setTasksList((prev) => prev.filter((task) => task.id !== id));
+    console.log("Удалена задача с id:", id);
+  };
+
+  const editTaskHandler = (id: number) => {
+    console.log("Редактирование задачи с id:", id);
   };
 
   return (
@@ -45,7 +54,12 @@ export const ProjectsPage = () => {
             />
           </Modal>
         </div>
-        <Tasks projects={projectsList} tasks={tasksList} />
+        <Tasks
+          projects={projectsList}
+          tasks={tasksList}
+          deleteTask={deleteTaskHandler}
+          editTask={editTaskHandler}
+        />
       </div>
     </div>
   );

@@ -1,20 +1,57 @@
-$primary-color: #d04db5;
-$disabled-color: #ccc;
+.wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.trigger {
+  cursor: pointer;
+}
 
 .dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
   width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+  min-width: 160px;
+
+  &.top {
+    bottom: 100%;
+    margin-bottom: 4px;
+  }
+
+  &.bottom {
+    top: 100%;
+    margin-top: 4px;
+  }
 }
 
-.content {
-  background-color: white;
-  border: 2px solid $disabled-color;
-  border-radius: 4px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
   padding: 10px;
-  transition: border-color 0.3s ease;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
+  }
 }
