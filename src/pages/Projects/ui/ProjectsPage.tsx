@@ -6,7 +6,7 @@ import { CreateTaskModalNew } from "src/features/Modals";
 import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
 import { Filters } from "./Filters";
 import { Tasks } from "./Tasks";
-import { ProjectListType, TaskListType } from "../data/types";
+import { ProjectListType, TaskInterface, TaskListType } from "../data/types";
 import { mockProjectsList, mockTasksList } from "../data/mocks";
 import { Header } from "@shared/ui/Header";
 
@@ -16,8 +16,27 @@ export const ProjectsPage = () => {
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
 
-  const saveTaskHandler = (form: TaskFormInterface) => {
-    console.log("Сохранено название задачи:", form);
+  const saveTaskHandler = ({
+    title,
+    description,
+    duration,
+    startDate,
+    endDate,
+    project,
+  }: TaskFormInterface) => {
+    const ids = tasksList.map(({ id }) => id).sort((a, b) => b - a);
+    const id = ids[0] + 1;
+    const newTask: TaskInterface = {
+      id,
+      status: "to-do",
+      name: title,
+      description,
+      duration: Number(duration),
+      startDate,
+      endDate,
+      project: Number(project),
+    };
+    setTasksList((prev) => [...prev, newTask]);
     setCreateTaskModalOpen(false);
   };
 

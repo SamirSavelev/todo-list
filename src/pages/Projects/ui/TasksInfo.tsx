@@ -28,9 +28,9 @@ export const TasksInfo: TaskInfoType = ({
 
   const onSelect = (option: string) => {
     if (option === "edit") {
-      editTask(id.toString());
+      editTask(id);
     } else if (option === "delete") {
-      deleteTask(id.toString());
+      deleteTask(id);
     }
   };
 
