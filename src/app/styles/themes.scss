@@ -9,6 +9,8 @@
   --project-page-filters-selected-item: #{$project-page-filters-selected-item-light};
   --task-date-bg: #{$task-date-bg-light};
   --task-date-text: #{$task-date-text-light};
+  --border-color: #{$border-color-light};
+  --icon-color: #{$icon-color-light};
 }
 
 .dark {
@@ -22,6 +24,8 @@
   --project-page-filters-selected-item: #{$project-page-filters-selected-item-dark};
   --task-date-bg: #{$task-date-bg-dark};
   --task-date-text: #{$task-date-text-dark};
+  --border-color: #{$border-color-dark};
+  --icon-color: #{$icon-color-dark};
 }
 
 body {

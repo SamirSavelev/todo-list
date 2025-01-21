@@ -27,6 +27,9 @@
   align-items: center;
   transition: transform 0.3s ease;
   transform: rotate(-90deg);
+  path {
+    stroke: var(--icon-color);
+  }
   &[data-isOpen="true"] {
     transform: rotate(0deg);
   }
