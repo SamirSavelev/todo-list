@@ -19,6 +19,12 @@
 
 .addProjectIcon {
   cursor: pointer;
+  path {
+    stroke: var(--icon-color);
+  }
+  circle {
+    fill: var(--icon-color);
+  }
 }
 
 .filters_container {
