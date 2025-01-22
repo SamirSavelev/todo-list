@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  min-width: 400px;
+  gap: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 12px;
+}
+.button_container {
+  margin-top: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

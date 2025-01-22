@@ -1,7 +1,11 @@
 import styles from "../styles/ProjectsPage.module.scss";
 import { Button } from "@shared/ui/components/Button/Button";
 import { useState } from "react";
-import { CreateTaskModalNew, DeleteTaskModal } from "src/features/Modals";
+import {
+  CreateTaskModalNew,
+  DeleteTaskModal,
+  EditTaskModal,
+} from "src/features/Modals";
 import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
 import { Filters } from "./Filters";
 import { Tasks } from "./Tasks";
@@ -15,7 +19,10 @@ export const ProjectsPage = () => {
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [isDeleteTaskModalOpen, setDeleteTaskModalOpen] = useState(false);
+  const [isEditTaskModalOpen, setEditTaskModalOpen] = useState(false);
+
   const [deleteTaskId, setDeleteTaskId] = useState<number | null>(null);
+  const [editTaskId, setEditTaskId] = useState<number | null>(null);
 
   const saveTaskHandler = ({
     title,
@@ -59,15 +66,22 @@ export const ProjectsPage = () => {
     setDeleteTaskId(null);
   };
 
+  const openEditTaskModal = (id: number) => {
+    setEditTaskModalOpen(true);
+    setEditTaskId(id);
+  };
+
+  const closeEditTaskModal = () => {
+    setEditTaskModalOpen(false);
+    setEditTaskId(null);
+  };
+
   const deleteTaskHandler = () => {
     setTasksList((prev) => prev.filter((task) => task.id !== deleteTaskId));
     setDeleteTaskModalOpen(false);
-    console.log("Удалена задача с id:", deleteTaskId);
   };
 
-  const editTaskHandler = (id: number) => {
-    console.log("Редактирование задачи с id:", id);
-  };
+  const editTaskHandler = () => {};
 
   return (
     <>
@@ -89,7 +103,7 @@ export const ProjectsPage = () => {
             projects={projectsList}
             tasks={tasksList}
             deleteTask={openDeleteTaskModal}
-            editTask={editTaskHandler}
+            editTask={openEditTaskModal}
           />
         </div>
       </div>
@@ -97,6 +111,12 @@ export const ProjectsPage = () => {
         isOpen={isDeleteTaskModalOpen}
         onClose={closeDeleteTaskModal}
         onDelete={deleteTaskHandler}
+      />
+      <EditTaskModal
+        isOpen={isEditTaskModalOpen}
+        onClose={closeEditTaskModal}
+        onSave={editTaskHandler}
+        task={tasksList.find((task) => task.id === editTaskId)}
       />
     </>
   );
