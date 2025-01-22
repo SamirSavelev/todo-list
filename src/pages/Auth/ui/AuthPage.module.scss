@@ -10,10 +10,11 @@
     border-radius: 12px;
     width: 600px;
     // height: 600px;
-    background-color: white;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    // background-color: white;
+    box-shadow: var(--auth-shadow);
     padding: 24px;
     gap: 12px;
+    background-color: var(--auth-bg-color);
 
     // h2 {
     //   text-align: center;

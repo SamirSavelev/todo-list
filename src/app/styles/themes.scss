@@ -11,6 +11,8 @@
   --task-date-text: #{$task-date-text-light};
   --border-color: #{$border-color-light};
   --icon-color: #{$icon-color-light};
+  --auth-bg-color: #{$auth-bg-color-ligt};
+  --auth-shadow: #{$auth-shadow-ligt};
 }
 
 .dark {
@@ -26,6 +28,8 @@
   --task-date-text: #{$task-date-text-dark};
   --border-color: #{$border-color-dark};
   --icon-color: #{$icon-color-dark};
+  --auth-bg-color: #{$auth-bg-color-dark};
+  --auth-shadow: #{$auth-shadow-dark};
 }
 
 body {

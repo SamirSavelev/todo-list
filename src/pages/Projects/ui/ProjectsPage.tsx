@@ -1,8 +1,7 @@
-import { Modal } from "@shared/ui/components/Modal/Modal";
 import styles from "../styles/ProjectsPage.module.scss";
 import { Button } from "@shared/ui/components/Button/Button";
 import { useState } from "react";
-import { CreateTaskModalNew } from "src/features/Modals";
+import { CreateTaskModalNew, DeleteTaskModal } from "src/features/Modals";
 import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
 import { Filters } from "./Filters";
 import { Tasks } from "./Tasks";
@@ -15,6 +14,8 @@ export const ProjectsPage = () => {
   const [tasksList, setTasksList] = useState<TaskListType>(mockTasksList);
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
+  const [isDeleteTaskModalOpen, setDeleteTaskModalOpen] = useState(false);
+  const [deleteTaskId, setDeleteTaskId] = useState<number | null>(null);
 
   const saveTaskHandler = ({
     title,
@@ -48,9 +49,20 @@ export const ProjectsPage = () => {
     setCreateTaskModalOpen(false);
   };
 
-  const deleteTaskHandler = (id: number) => {
-    setTasksList((prev) => prev.filter((task) => task.id !== id));
-    console.log("Удалена задача с id:", id);
+  const openDeleteTaskModal = (id: number) => {
+    setDeleteTaskModalOpen(true);
+    setDeleteTaskId(id);
+  };
+
+  const closeDeleteTaskModal = () => {
+    setDeleteTaskModalOpen(false);
+    setDeleteTaskId(null);
+  };
+
+  const deleteTaskHandler = () => {
+    setTasksList((prev) => prev.filter((task) => task.id !== deleteTaskId));
+    setDeleteTaskModalOpen(false);
+    console.log("Удалена задача с id:", deleteTaskId);
   };
 
   const editTaskHandler = (id: number) => {
@@ -58,28 +70,34 @@ export const ProjectsPage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <Filters projects={projectsList} tasks={tasksList} />
-      <div className={styles.content_container}>
-        <Header />
-        <div className={styles.settings}>
-          <Button type="primary" size="small" onClick={openCreateTaskModal}>
-            Создать задачу
-          </Button>
-          <Modal isOpen={isCreateTaskModalOpen} onClose={closeCreateTaskModal}>
+    <>
+      <div className={styles.container}>
+        <Filters projects={projectsList} tasks={tasksList} />
+        <div className={styles.content_container}>
+          <Header />
+          <div className={styles.settings}>
+            <Button type="primary" size="small" onClick={openCreateTaskModal}>
+              Создать задачу
+            </Button>
             <CreateTaskModalNew
+              isOpen={isCreateTaskModalOpen}
               onSave={saveTaskHandler}
               onClose={closeCreateTaskModal}
             />
-          </Modal>
+          </div>
+          <Tasks
+            projects={projectsList}
+            tasks={tasksList}
+            deleteTask={openDeleteTaskModal}
+            editTask={editTaskHandler}
+          />
         </div>
-        <Tasks
-          projects={projectsList}
-          tasks={tasksList}
-          deleteTask={deleteTaskHandler}
-          editTask={editTaskHandler}
-        />
       </div>
-    </div>
+      <DeleteTaskModal
+        isOpen={isDeleteTaskModalOpen}
+        onClose={closeDeleteTaskModal}
+        onDelete={deleteTaskHandler}
+      />
+    </>
   );
 };

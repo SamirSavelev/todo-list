@@ -21,6 +21,8 @@ $task-date-bg-light: rgba(136, 141, 167, 0.1);
 $task-date-text-light: rgba(136, 141, 167, 1);
 $border-color-light: rgba(28, 29, 34, 0.08);
 $icon-color-light: #1c1d22;
+$auth-bg-color-ligt: #ffffff;
+$auth-shadow-ligt: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
 // Темная тема
 $background-color-dark: #2a2b2f;
@@ -35,3 +37,5 @@ $task-date-bg-dark: rgba(255, 255, 255, 0.06);
 $task-date-text-dark: rgba(152, 156, 170, 1);
 $border-color-dark: rgba(255, 255, 255, 0.08);
 $icon-color-dark: rgba(255, 255, 255, 0.5);
+$auth-bg-color-dark: #1c1d22;
+$auth-shadow-dark: none;

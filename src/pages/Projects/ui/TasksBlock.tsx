@@ -17,14 +17,16 @@ export const TasksBlock: TasksBlockType = ({
       </Text>
       <div className={styles.task__list}>
         {tasks.map((task) => (
-          <TasksInfo
-            projectName={
-              projects.find(({ id }) => id === task.project)?.title || ""
-            }
-            key={task.id}
-            {...task}
-            {...props}
-          />
+          <>
+            <TasksInfo
+              projectName={
+                projects.find(({ id }) => id === task.project)?.title || ""
+              }
+              key={task.id}
+              {...task}
+              {...props}
+            />
+          </>
         ))}
       </div>
     </div>

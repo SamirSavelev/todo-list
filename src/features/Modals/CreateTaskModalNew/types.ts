@@ -10,6 +10,7 @@ export interface TaskFormInterface {
 }
 
 interface CreateTaskModalNewProps {
+  isOpen: boolean;
   onSave: (data: TaskFormInterface) => void;
   onClose: () => void;
 }
