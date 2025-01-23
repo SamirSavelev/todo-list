@@ -1,3 +1,4 @@
+import { ProjectListType } from "@pages/Projects/data/types";
 import { FC } from "react";
 
 export interface TaskFormInterface {
@@ -13,6 +14,7 @@ interface CreateTaskModalNewProps {
   isOpen: boolean;
   onSave: (data: TaskFormInterface) => void;
   onClose: () => void;
+  projects: ProjectListType;
 }
 
 export type CreateTaskModalNewType = FC<CreateTaskModalNewProps>;

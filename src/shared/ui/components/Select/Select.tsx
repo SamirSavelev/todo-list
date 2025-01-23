@@ -10,22 +10,19 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
     {
       label,
       options,
-      value,
-      onChange,
+      selectedValue,
       description,
       disabled = false,
+      select,
       ...props
     },
     ref
   ) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState(value || "");
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Обработчик выбора опции
     const handleSelect = (option: Option) => {
-      setSelectedValue(option.label);
-      if (onChange) onChange(option.value); // Условие if вместо &&
+      if (select) select(option);
       setIsOpen(false);
     };
 
@@ -37,7 +34,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
           <Input
             {...props}
             ref={ref}
-            value={selectedValue}
+            value={selectedValue?.label || ""}
             onClick={() => setIsOpen(!isOpen)}
             readOnly
             disabled={disabled}

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, FC, ChangeEvent } from "react";
+import { InputHTMLAttributes, FC } from "react";
 
 export interface Option {
   label: string;
@@ -15,7 +15,9 @@ export interface SelectProps
     message?: string;
     type?: DescriptionType;
   };
-  onChange?: (event: ChangeEvent<HTMLInputElement> | string) => void; // Изменяем тип на совместимый
+  value?: string;
+  select?: (option: Option) => void;
+  selectedValue?: Option | null;
 }
 
 export type SelectType = FC<SelectProps>;

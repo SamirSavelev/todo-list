@@ -32,6 +32,7 @@ export const ProjectsPage = () => {
     endDate,
     project,
   }: TaskFormInterface) => {
+    console.log("project", project);
     const ids = tasksList.map(({ id }) => id).sort((a, b) => b - a);
     const id = ids[0] + 1;
     const newTask: TaskInterface = {
@@ -97,6 +98,7 @@ export const ProjectsPage = () => {
               isOpen={isCreateTaskModalOpen}
               onSave={saveTaskHandler}
               onClose={closeCreateTaskModal}
+              projects={projectsList}
             />
           </div>
           <Tasks
@@ -117,6 +119,7 @@ export const ProjectsPage = () => {
         onClose={closeEditTaskModal}
         onSave={editTaskHandler}
         task={tasksList.find((task) => task.id === editTaskId)}
+        projects={projectsList}
       />
     </>
   );

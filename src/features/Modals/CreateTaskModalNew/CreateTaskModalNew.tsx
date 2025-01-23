@@ -11,16 +11,17 @@ import { useForm, Controller } from "react-hook-form";
 import { CreateTaskModalNewType, TaskFormInterface } from "./types";
 import { Modal } from "@shared/ui/components/Modal";
 
-const options = [
-  { label: "Фитнес", value: "1" },
-  { label: "Учеба", value: "2" },
-  { label: "Домашние дела", value: "3" },
-];
+// const options = [
+//   { label: "Фитнес", value: "1" },
+//   { label: "Учеба", value: "2" },
+//   { label: "Домашние дела", value: "3" },
+// ];
 
 export const CreateTaskModalNew: CreateTaskModalNewType = ({
   isOpen,
   onClose,
   onSave,
+  projects,
 }) => {
   const {
     register,
@@ -29,6 +30,11 @@ export const CreateTaskModalNew: CreateTaskModalNewType = ({
     control,
     reset,
   } = useForm<TaskFormInterface>();
+
+  const projectsList = projects.map(({ id, title }) => ({
+    value: id.toString(),
+    label: title,
+  }));
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -86,7 +92,7 @@ export const CreateTaskModalNew: CreateTaskModalNewType = ({
               <Select
                 label="Проект"
                 placeholder="Выберите проект"
-                options={options}
+                options={projectsList}
                 {...field}
                 // description={{
                 //   message: errors?.select?.message,
