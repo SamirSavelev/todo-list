@@ -12,6 +12,7 @@ import { Tasks } from "./Tasks";
 import { ProjectListType, TaskInterface, TaskListType } from "../data/types";
 import { mockProjectsList, mockTasksList } from "../data/mocks";
 import { Header } from "@shared/ui/Header";
+import { EditTaskFormInterface } from "src/features/Modals/EditTaskModal/types";
 
 export const ProjectsPage = () => {
   const [projectsList] = useState<ProjectListType>(mockProjectsList);
@@ -32,7 +33,6 @@ export const ProjectsPage = () => {
     endDate,
     project,
   }: TaskFormInterface) => {
-    console.log("project", project);
     const ids = tasksList.map(({ id }) => id).sort((a, b) => b - a);
     const id = ids[0] + 1;
     const newTask: TaskInterface = {
@@ -43,8 +43,9 @@ export const ProjectsPage = () => {
       duration: Number(duration),
       startDate,
       endDate,
-      project: Number(project),
+      project: Number(project?.value),
     };
+
     setTasksList((prev) => [...prev, newTask]);
     setCreateTaskModalOpen(false);
   };
@@ -82,7 +83,39 @@ export const ProjectsPage = () => {
     setDeleteTaskModalOpen(false);
   };
 
-  const editTaskHandler = () => {};
+  const editTaskHandler = ({
+    title,
+    description,
+    duration,
+    startDate,
+    endDate,
+    project,
+  }: EditTaskFormInterface) => {
+    const editedTask = tasksList.find((task) => task.id === editTaskId);
+
+    if (!editTaskId) return;
+
+    const updatedTask: TaskInterface = {
+      id: editTaskId,
+      name: title,
+      description,
+      duration: Number(duration),
+      startDate,
+      endDate,
+      project: Number(project?.value),
+      status: editedTask?.status ?? "to-do",
+    };
+    const updatedTasks = tasksList.map((task) => {
+      if (task.id === editTaskId) {
+        return updatedTask;
+      }
+      return task;
+    });
+
+    setTasksList(updatedTasks);
+
+    setEditTaskModalOpen(false);
+  };
 
   return (
     <>

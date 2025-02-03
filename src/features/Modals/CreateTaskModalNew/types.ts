@@ -1,4 +1,5 @@
 import { ProjectListType } from "@pages/Projects/data/types";
+import { Option } from "@shared/ui/components/Select/types";
 import { FC } from "react";
 
 export interface TaskFormInterface {
@@ -7,7 +8,7 @@ export interface TaskFormInterface {
   description: string;
   startDate: string;
   endDate: string;
-  project: string;
+  project: Option;
 }
 
 interface CreateTaskModalNewProps {

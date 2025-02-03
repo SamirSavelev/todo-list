@@ -1,5 +1,5 @@
 import { useState, useRef, forwardRef } from "react";
-import { Input } from "../Input/Input";
+import { Input } from "../Input";
 import styles from "./Select.module.scss";
 import { SelectProps, Option } from "./types";
 import { IoIosArrowDown } from "react-icons/io";
@@ -10,10 +10,10 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
     {
       label,
       options,
-      selectedValue,
+      value,
+      onChange,
       description,
       disabled = false,
-      select,
       ...props
     },
     ref
@@ -22,7 +22,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleSelect = (option: Option) => {
-      if (select) select(option);
+      onChange?.(option);
       setIsOpen(false);
     };
 
@@ -34,7 +34,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
           <Input
             {...props}
             ref={ref}
-            value={selectedValue?.label || ""}
+            value={value?.label || ""}
             onClick={() => setIsOpen(!isOpen)}
             readOnly
             disabled={disabled}

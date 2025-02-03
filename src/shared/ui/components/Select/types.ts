@@ -8,16 +8,15 @@ export interface Option {
 export type DescriptionType = "info" | "warning" | "error" | "success";
 
 export interface SelectProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
   label?: string;
   options: Option[];
   description?: {
     message?: string;
     type?: DescriptionType;
   };
-  value?: string;
-  select?: (option: Option) => void;
-  selectedValue?: Option | null;
+  onChange?: (value: Option) => void;
+  value?: Option | null;
 }
 
 export type SelectType = FC<SelectProps>;

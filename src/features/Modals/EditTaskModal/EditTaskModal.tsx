@@ -8,9 +8,10 @@ import {
 } from "@shared/ui/components";
 import styles from "./EditTaskModal.module.scss";
 import { useForm, Controller } from "react-hook-form";
-import { EditTaskModalType, TaskFormInterface } from "./types";
+import { EditTaskModalType, EditTaskFormInterface } from "./types";
 import { Modal } from "@shared/ui/components/Modal";
 import { useEffect } from "react";
+import { Option } from "@shared/ui/components/Select/types";
 
 // export const mockProjectsList: ProjectListType = [
 //   {
@@ -46,10 +47,10 @@ export const EditTaskModal: EditTaskModalType = ({
     formState: { errors },
     control,
     reset,
-  } = useForm<TaskFormInterface>();
+    setValue,
+  } = useForm<EditTaskFormInterface>();
 
   // if (!task) return <></>;
-  const isHasTask = Boolean(task);
 
   const projectsList = projects.map(({ id, title }) => ({
     value: id.toString(),
@@ -57,24 +58,23 @@ export const EditTaskModal: EditTaskModalType = ({
   }));
 
   useEffect(() => {
-    if (isHasTask) {
-      reset({
-        title: task?.name,
-        description: task?.description,
-        startDate: task?.startDate,
-        endDate: task?.endDate,
-        project: projectsList.find(
-          (item) => item.value === task?.project?.toString()
-        ),
-        duration: task?.duration?.toString(),
-      });
+    if (task) {
+      const { name, description, startDate, endDate, project, duration } = task;
+      const projectValue: Option | null =
+        projectsList.find(({ value }) => Number(value) === project) ?? null;
+      setValue("title", name);
+      setValue("description", description);
+      setValue("startDate", startDate);
+      setValue("endDate", endDate);
+      setValue("project", projectValue);
+      setValue("duration", duration?.toString() || "");
     }
-  }, [task, isHasTask, reset, projectsList]);
+  }, [task, setValue, projectsList]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.container}>
-        {isHasTask && (
+        {Boolean(task) && (
           <>
             <Text variant="h3">Редактирование задачи</Text>
             <form onSubmit={handleSubmit(onSave)} className={styles.form}>
@@ -131,8 +131,6 @@ export const EditTaskModal: EditTaskModalType = ({
                     placeholder="Выберите проект"
                     options={projectsList}
                     {...field}
-                    selectedValue={field?.value}
-                    value={field?.value?.label}
                     // description={{
                     //   message: errors?.select?.message,
                     //   type: errors?.select ? "error" : "info",
@@ -163,7 +161,7 @@ export const EditTaskModal: EditTaskModalType = ({
             </form>
           </>
         )}
-        {!isHasTask && (
+        {!task && (
           <>
             <Text variant="h3">Задача не найдена</Text>
             <div className={styles.button_container}>
