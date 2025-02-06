@@ -5,7 +5,7 @@ import { ReactComponent as MoreIconDark } from "@assets/icons/more_dark.svg";
 import { Dropdown, Text } from "@shared/ui/components";
 import { taskInfoDropdownOptions, taskStatusList } from "../data/constants";
 import moment from "moment";
-import { useTheme } from "@app/providers/ThemeProvider/ThemeContext";
+import { useAppSelector } from "@app/hooks";
 
 export const TasksInfo: TaskInfoType = ({
   deleteTask,
@@ -16,7 +16,7 @@ export const TasksInfo: TaskInfoType = ({
   endDate,
   id,
 }) => {
-  const { theme } = useTheme();
+  const { theme } = useAppSelector((state) => state.theme);
   const statusName =
     taskStatusList.find((item) => item.id === status)?.title || "";
 

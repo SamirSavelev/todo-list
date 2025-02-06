@@ -9,14 +9,15 @@ import {
 import { TaskFormInterface } from "src/features/Modals/CreateTaskModalNew/types";
 import { Filters } from "./Filters";
 import { Tasks } from "./Tasks";
-import { ProjectListType, TaskInterface, TaskListType } from "../data/types";
-import { mockProjectsList, mockTasksList } from "../data/mocks";
+import { TaskInterface } from "../data/types";
 import { Header } from "@shared/ui/Header";
 import { EditTaskFormInterface } from "src/features/Modals/EditTaskModal/types";
+import { useAppSelector, useAppDispatch } from "@app/hooks";
+import { setTasksList } from "../model/projectsSlice";
 
 export const ProjectsPage = () => {
-  const [projectsList] = useState<ProjectListType>(mockProjectsList);
-  const [tasksList, setTasksList] = useState<TaskListType>(mockTasksList);
+  const { projectsList, tasksList } = useAppSelector((state) => state.projects);
+  const dispatch = useAppDispatch();
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [isDeleteTaskModalOpen, setDeleteTaskModalOpen] = useState(false);
@@ -46,7 +47,9 @@ export const ProjectsPage = () => {
       project: Number(project?.value),
     };
 
-    setTasksList((prev) => [...prev, newTask]);
+    const updatedTasks = [...tasksList, newTask];
+
+    dispatch(setTasksList(updatedTasks));
     setCreateTaskModalOpen(false);
   };
 
@@ -79,7 +82,8 @@ export const ProjectsPage = () => {
   };
 
   const deleteTaskHandler = () => {
-    setTasksList((prev) => prev.filter((task) => task.id !== deleteTaskId));
+    const updatedTasks = tasksList.filter((task) => task.id !== deleteTaskId);
+    dispatch(setTasksList(updatedTasks));
     setDeleteTaskModalOpen(false);
   };
 
@@ -112,7 +116,7 @@ export const ProjectsPage = () => {
       return task;
     });
 
-    setTasksList(updatedTasks);
+    dispatch(setTasksList(updatedTasks));
 
     setEditTaskModalOpen(false);
   };
