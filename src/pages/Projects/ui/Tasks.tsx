@@ -3,8 +3,10 @@ import { taskStatusList } from "../data/constants";
 import styles from "../styles/Tasks.module.scss";
 import { TasksType } from "../types/Tasks.types";
 import { TasksBlock } from "./TasksBlock";
+import { useAppSelector } from "@app/hooks";
 
-export const Tasks: TasksType = ({ projects, tasks, ...props }) => {
+export const Tasks: TasksType = (props) => {
+  const { projectsList, tasksList } = useAppSelector((state) => state.projects);
   const [searchParams] = useSearchParams();
   const isProjects = searchParams.get("project") !== null;
 
@@ -12,23 +14,23 @@ export const Tasks: TasksType = ({ projects, tasks, ...props }) => {
     if (isProjects) {
       const selectedProject = searchParams.get("project");
       if (selectedProject === "all") {
-        return tasks;
+        return tasksList;
       } else {
-        return tasks.filter(
+        return tasksList.filter(
           ({ project }) => project?.toString() === selectedProject
         );
       }
     } else {
       const selectedStatus = searchParams.get("status");
       if (selectedStatus === "all") {
-        return tasks;
+        return tasksList;
       } else {
-        return tasks.filter(
+        return tasksList.filter(
           ({ status }) => status?.toString() === selectedStatus
         );
       }
     }
-    return tasks;
+    return tasksList;
   };
 
   const filteredTasks = getFilteredTasks();
@@ -42,7 +44,7 @@ export const Tasks: TasksType = ({ projects, tasks, ...props }) => {
           tasks,
         };
       })
-    : projects.map(({ id, title }) => {
+    : projectsList.map(({ id, title }) => {
         const tasks = filteredTasks.filter(({ project }) => project === id);
         return {
           id,
@@ -55,7 +57,7 @@ export const Tasks: TasksType = ({ projects, tasks, ...props }) => {
     <div className={styles.container}>
       {blocksArray.map(({ id, title, tasks }) => (
         <TasksBlock
-          projects={projects}
+          projects={projectsList}
           key={id}
           tasks={tasks}
           title={title}

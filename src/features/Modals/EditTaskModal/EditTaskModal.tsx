@@ -12,6 +12,7 @@ import { EditTaskModalType, EditTaskFormInterface } from "./types";
 import { Modal } from "@shared/ui/components/Modal";
 import { useEffect } from "react";
 import { Option } from "@shared/ui/components/Select/types";
+import { useAppSelector } from "@app/hooks";
 
 // export const mockProjectsList: ProjectListType = [
 //   {
@@ -39,8 +40,8 @@ export const EditTaskModal: EditTaskModalType = ({
   onClose,
   onSave,
   task,
-  projects,
 }) => {
+  const { projectsList } = useAppSelector((state) => state.projects);
   const {
     register,
     handleSubmit,
@@ -52,7 +53,7 @@ export const EditTaskModal: EditTaskModalType = ({
 
   // if (!task) return <></>;
 
-  const projectsList = projects.map(({ id, title }) => ({
+  const projectsListOptions = projectsList.map(({ id, title }) => ({
     value: id.toString(),
     label: title,
   }));
@@ -61,7 +62,8 @@ export const EditTaskModal: EditTaskModalType = ({
     if (task) {
       const { name, description, startDate, endDate, project, duration } = task;
       const projectValue: Option | null =
-        projectsList.find(({ value }) => Number(value) === project) ?? null;
+        projectsListOptions.find(({ value }) => Number(value) === project) ??
+        null;
       setValue("title", name);
       setValue("description", description);
       setValue("startDate", startDate);
@@ -69,7 +71,7 @@ export const EditTaskModal: EditTaskModalType = ({
       setValue("project", projectValue);
       setValue("duration", duration?.toString() || "");
     }
-  }, [task, setValue, projectsList]);
+  }, [task, setValue, projectsListOptions]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -129,7 +131,7 @@ export const EditTaskModal: EditTaskModalType = ({
                   <Select
                     label="Проект"
                     placeholder="Выберите проект"
-                    options={projectsList}
+                    options={projectsListOptions}
                     {...field}
                     // description={{
                     //   message: errors?.select?.message,

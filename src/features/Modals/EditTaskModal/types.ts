@@ -1,4 +1,4 @@
-import { ProjectListType, TaskInterface } from "@pages/Projects/data/types";
+import { TaskInterface } from "@pages/Projects/data/types";
 import { Option } from "@shared/ui/components/Select/types";
 import { FC } from "react";
 
@@ -16,7 +16,6 @@ interface EditTaskModaProps {
   onSave: (data: EditTaskFormInterface) => void;
   onClose: () => void;
   task?: TaskInterface;
-  projects: ProjectListType;
 }
 
 export type EditTaskModalType = FC<EditTaskModaProps>;

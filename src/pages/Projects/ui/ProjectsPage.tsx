@@ -16,7 +16,7 @@ import { useAppSelector, useAppDispatch } from "@app/hooks";
 import { setTasksList } from "../model/projectsSlice";
 
 export const ProjectsPage = () => {
-  const { projectsList, tasksList } = useAppSelector((state) => state.projects);
+  const { tasksList } = useAppSelector((state) => state.projects);
   const dispatch = useAppDispatch();
 
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -124,7 +124,7 @@ export const ProjectsPage = () => {
   return (
     <>
       <div className={styles.container}>
-        <Filters projects={projectsList} tasks={tasksList} />
+        <Filters />
         <div className={styles.content_container}>
           <Header />
           <div className={styles.settings}>
@@ -135,12 +135,9 @@ export const ProjectsPage = () => {
               isOpen={isCreateTaskModalOpen}
               onSave={saveTaskHandler}
               onClose={closeCreateTaskModal}
-              projects={projectsList}
             />
           </div>
           <Tasks
-            projects={projectsList}
-            tasks={tasksList}
             deleteTask={openDeleteTaskModal}
             editTask={openEditTaskModal}
           />
@@ -156,7 +153,6 @@ export const ProjectsPage = () => {
         onClose={closeEditTaskModal}
         onSave={editTaskHandler}
         task={tasksList.find((task) => task.id === editTaskId)}
-        projects={projectsList}
       />
     </>
   );

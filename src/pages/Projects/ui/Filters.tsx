@@ -1,24 +1,25 @@
 import { Accordion, Text, ThemeSwitch } from "@shared/ui/components";
 import { ReactComponent as CirclePlusIcon } from "@assets/icons/circle-plus.svg";
 import styles from "../styles/Filters.module.scss";
-import { FiltersType } from "../types/Filters.types";
 import { useSearchParams } from "react-router-dom";
 import { taskFiltersList } from "../data/constants";
 import { useEffect } from "react";
+import { useAppSelector } from "@app/hooks";
 
-export const Filters: FiltersType = ({ projects, tasks }) => {
+export const Filters = () => {
+  const { projectsList, tasksList } = useAppSelector((state) => state.projects);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const formattedProjects = [
     {
       id: "all",
       title: "Все проекты",
-      count: projects.length,
+      count: projectsList.length,
     },
-    ...projects.map(({ id, title }) => ({
+    ...projectsList.map(({ id, title }) => ({
       id: id,
       title: title,
-      count: tasks.filter((task) => task.project === id).length,
+      count: tasksList.filter((task) => task.project === id).length,
     })),
   ];
 
@@ -27,8 +28,8 @@ export const Filters: FiltersType = ({ projects, tasks }) => {
     title: title,
     count:
       id === "all"
-        ? tasks.length
-        : tasks.filter((task) => task.status === id).length,
+        ? tasksList.length
+        : tasksList.filter((task) => task.status === id).length,
   }));
 
   const selectedProjectId = searchParams.get("project");

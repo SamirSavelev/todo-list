@@ -10,6 +10,7 @@ import styles from "./CreateTaskModalNew.module.scss";
 import { useForm, Controller } from "react-hook-form";
 import { CreateTaskModalNewType, TaskFormInterface } from "./types";
 import { Modal } from "@shared/ui/components/Modal";
+import { useAppSelector } from "@app/hooks";
 
 // const options = [
 //   { label: "Фитнес", value: "1" },
@@ -21,8 +22,8 @@ export const CreateTaskModalNew: CreateTaskModalNewType = ({
   isOpen,
   onClose,
   onSave,
-  projects,
 }) => {
+  const { projectsList } = useAppSelector((state) => state.projects);
   const {
     register,
     handleSubmit,
@@ -31,7 +32,7 @@ export const CreateTaskModalNew: CreateTaskModalNewType = ({
     reset,
   } = useForm<TaskFormInterface>();
 
-  const projectsList = projects.map(({ id, title }) => ({
+  const projectsListOptions = projectsList.map(({ id, title }) => ({
     value: id.toString(),
     label: title,
   }));
@@ -92,7 +93,7 @@ export const CreateTaskModalNew: CreateTaskModalNewType = ({
               <Select
                 label="Проект"
                 placeholder="Выберите проект"
-                options={projectsList}
+                options={projectsListOptions}
                 {...field}
                 // description={{
                 //   message: errors?.select?.message,
