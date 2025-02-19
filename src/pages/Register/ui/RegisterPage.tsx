@@ -3,12 +3,14 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import styles from "./Register.module.scss";
 import { Button, Input } from "../../../shared/ui/components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useRegisterMutation } from "src/api/auth/api";
+import { RegisterRequest } from "src/api/auth/types";
 
 // Описываем интерфейс формы
 interface IFormInputs {
-  name: string;
-  lastname: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   password: string;
   password2: string;
 }
@@ -23,9 +25,22 @@ export const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
-  // Функция для обработки отправки формы
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    console.log(data);
+  const [register] = useRegisterMutation();
+
+  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+    const requestData: RegisterRequest = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    };
+    try {
+      const response = await register(requestData).unwrap();
+      console.log("УСПЕШНО response", response);
+    } catch (error) {
+      console.log("ОШИБКА error", error);
+    }
+    console.log("Новый пользователь", requestData);
   };
 
   const toggleShowPassword = () => {
@@ -43,7 +58,7 @@ export const RegisterPage = () => {
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           {/* Имя */}
           <Controller
-            name="name"
+            name="firstName"
             control={control}
             defaultValue=""
             rules={{ required: "Имя обязательно для заполнения" }}
@@ -51,11 +66,13 @@ export const RegisterPage = () => {
               <Input {...field} placeholder="Введите имя" />
             )}
           />
-          {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+          {errors.firstName && (
+            <p className={styles.error}>{errors.firstName.message}</p>
+          )}
 
           {/* Фамилия */}
           <Controller
-            name="lastname"
+            name="lastName"
             control={control}
             defaultValue=""
             render={({ field }) => (
@@ -65,13 +82,23 @@ export const RegisterPage = () => {
 
           {/* Отчество */}
           <Controller
-            name="surname"
+            name="email"
             control={control}
             defaultValue=""
+            rules={{
+              required: "Электронная почта обязательна для заполнения",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Некорректный адрес электронной почты",
+              },
+            }}
             render={({ field }) => (
-              <Input {...field} placeholder="Введите отчество" />
+              <Input {...field} placeholder="Введите адрес электронной почты" />
             )}
           />
+          {errors.email && (
+            <p className={styles.error}>{errors.email.message}</p>
+          )}
 
           {/* Пароль */}
           <Controller
