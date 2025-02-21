@@ -53,7 +53,7 @@ export const AuthPage = () => {
         />
 
         <div className={styles.button_container}>
-          <Button type="primary" onClick={log.bind(null, { email, password })}>
+          <Button type="primary" onClick={() => log({ email, password })}>
             Войти
           </Button>
         </div>
