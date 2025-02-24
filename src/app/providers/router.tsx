@@ -1,6 +1,6 @@
+// src/providers/router.tsx
+// src/providers/router.tsx
 import { createBrowserRouter } from "react-router-dom";
-import { DraftPage } from "../../draft/DraftPage";
-import { DraftPage2 } from "../../draft/DraftPage2";
 import {
   AboutPage,
   HomePage,
@@ -12,68 +12,78 @@ import {
   SettingsPage,
 } from "../../pages";
 import { Layout } from "@shared/ui/Layout";
+import { RequireAuth } from "src/app/RequireAuth";
+import { NoAuth } from "src/app/NoAuth";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
-        <HomePage />
-      </Layout>
+      <RequireAuth>
+        <Layout>
+          <HomePage />
+        </Layout>
+      </RequireAuth>
     ),
   },
   {
     path: "/about",
     element: (
-      <Layout>
-        <AboutPage />
-      </Layout>
+      <RequireAuth>
+        <Layout>
+          <AboutPage />
+        </Layout>
+      </RequireAuth>
     ),
   },
   {
     path: "/projects",
     element: (
-      <Layout>
-        <ProjectsPage />
-      </Layout>
+      <RequireAuth>
+        <Layout>
+          <ProjectsPage />
+        </Layout>
+      </RequireAuth>
     ),
   },
   {
     path: "/profile",
     element: (
-      <Layout>
-        <ProfilePage />
-      </Layout>
+      <RequireAuth>
+        <Layout>
+          <ProfilePage />
+        </Layout>
+      </RequireAuth>
     ),
   },
   {
     path: "/settings",
     element: (
-      <Layout>
-        <SettingsPage />
-      </Layout>
+      <RequireAuth>
+        <Layout>
+          <SettingsPage />
+        </Layout>
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "/auth",
+    element: (
+      <NoAuth>
+        <AuthPage />
+      </NoAuth>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <NoAuth>
+        <RegisterPage />
+      </NoAuth>
     ),
   },
   {
     path: "*",
     element: <NotFoundPage />,
-  },
-  {
-    path: "/auth",
-    element: <AuthPage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
-
-  {
-    path: "/draft",
-    element: <DraftPage />,
-  },
-
-  {
-    path: "/draft2",
-    element: <DraftPage2 />,
   },
 ]);

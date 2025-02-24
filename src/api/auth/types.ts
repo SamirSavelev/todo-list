@@ -16,6 +16,10 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  accesToken: string;
+  accessToken: string;
   refreshToken: string;
+}
+
+export interface RefreshResponse {
+  accessToken: string;
 }

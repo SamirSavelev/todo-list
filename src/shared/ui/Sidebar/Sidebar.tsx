@@ -3,12 +3,18 @@ import { ReactComponent as LogoIcon } from "@assets/icons/logo.svg";
 import { menu } from "./data/menu";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { ReactComponent as LogoutIcon } from "@assets/icons/logout.svg";
+import { useAppDispatch } from "@app/hooks";
+import { logout } from "src/features/Auth/authSlice";
 
 export const Sidebar = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const logout = () => navigate("/auth");
+  const handlelogout = () => {
+    dispatch(logout());
+    navigate("/auth");
+  };
 
   return (
     <div className={styles.container}>
@@ -31,7 +37,10 @@ export const Sidebar = () => {
           })}
         </div>
       </div>
-      <div className={`${styles.menu_item} ${styles.logout}`} onClick={logout}>
+      <div
+        className={`${styles.menu_item} ${styles.logout}`}
+        onClick={handlelogout}
+      >
         <LogoutIcon className={styles.menu_item_icon} />
       </div>
     </div>

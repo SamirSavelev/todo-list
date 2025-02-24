@@ -1,15 +1,15 @@
-import { projectReducer } from "@pages/Projects/model/projectsSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import { themeReducer } from "src/features/Theme/themeSlice";
+import { projectReducer } from "@pages/Projects/model/projectsSlice";
 import { authApi, reducerAuth } from "src/api/auth/api";
 import { profileApi, reducerProfile } from "src/api/profile/api";
-import { themeReducer } from "src/features/Theme/themeSlice";
+import authReducer from "src/features/Auth/authSlice"; // Импортируем auth‑редюсер
 
 export const store = configureStore({
   reducer: {
-    //Здесь мы добавляем редьюсеры слайсов
     theme: themeReducer,
     projects: projectReducer,
-    //Здесь мы добавляем редьюсеры API
+    auth: authReducer, // Добавляем auth‑редюсер
     authApi: reducerAuth,
     profileApi: reducerProfile,
   },
