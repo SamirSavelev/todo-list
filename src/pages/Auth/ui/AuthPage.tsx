@@ -3,51 +3,106 @@ import styles from "./AuthPage.module.scss";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Button, Input } from "@shared/ui/components";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useLoginMutation } from "src/api/auth/api";
+
+interface AuthForm {
+  email: string;
+  password: string;
+}
+
+interface ErrorInterface {
+  data: {
+    message: string;
+  };
+  status: number;
+}
 
 export const AuthPage = () => {
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("1234");
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthForm>();
+  const [login, { isLoading, error }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const onSubmit: SubmitHandler<AuthForm> = async (data) => {
+    try {
+      const response = await login(data).unwrap();
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h2>Авторизация</h2>
-        <Input
-          placeholder="Введите Email"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
-        <Input
-          placeholder="Введите пароль"
-          value={password}
-          type={showPassword ? "text" : "password"}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          inputSuffix={
-            <span onClick={toggleShowPassword} style={{ cursor: "pointer" }}>
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
-          }
-        />
-
-        <div className={styles.button_container}>
-          <Button
-            type="primary"
-            onClick={() => {
-              console.log("click");
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="email"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: "Email обязателен для заполнения",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Некорректный Email",
+              },
             }}
-          >
-            Войти
-          </Button>
-        </div>
+            render={({ field }) => (
+              <Input
+                {...field}
+                placeholder="Введите Email"
+                description={{
+                  message: errors.email ? errors.email.message : "",
+                  type: errors.email ? "error" : "info",
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            rules={{ required: "Пароль обязателен для заполнения" }}
+            render={({ field }) => (
+              <Input
+                {...field}
+                placeholder="Введите пароль"
+                type={showPassword ? "text" : "password"}
+                inputSuffix={
+                  <span
+                    onClick={toggleShowPassword}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                }
+                description={{
+                  message: errors.password ? errors.password.message : "",
+                  type: errors.password ? "error" : "info",
+                }}
+              />
+            )}
+          />
+          <div className={styles.button_container}>
+            <Button type="primary" disabled={isLoading}>
+              Войти
+            </Button>
+          </div>
+          {error && (
+            <div className={styles.error}>
+              {(error as ErrorInterface)?.data?.message}
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );

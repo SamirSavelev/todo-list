@@ -1,6 +1,7 @@
 import { forwardRef, useState } from "react";
 import styles from "./Input.module.scss";
 import { InputProps } from "./types";
+import cn from "classnames";
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -23,23 +24,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const [focus, setFocus] = useState(false);
     const [hover, setHover] = useState(false);
 
-    const border = disabled
-      ? styles.disabled
-      : description?.type === "error"
-      ? styles.input_error
-      : description?.type === "warning"
-      ? styles.input_warning
-      : focus || hover
-      ? styles.primary_border
-      : "";
-
     return (
       <div className={styles.wrapper}>
         {label && (
-          <label className={`${styles.label} ${labelClassName}`}>{label}</label>
+          <label className={cn(styles.label, labelClassName)}>{label}</label>
         )}
         <div
-          className={`${styles.container} ${styles[inputSize]} ${border} ${inputClassName}`}
+          className={cn(styles.container, styles[inputSize], inputClassName, {
+            [styles.primary_border]: focus || hover,
+
+            [styles.input_error]: description?.type === "error",
+            [styles.input_warning]: description?.type === "warning",
+            [styles.input_success]: description?.type === "success",
+            [styles.disabled]: disabled,
+          })}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           onClick={onClick}
@@ -59,9 +57,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
         {description?.message && (
           <div
-            className={`${styles.description} ${
+            className={cn(
+              styles.description,
               styles[description?.type || "info"]
-            }`}
+            )}
           >
             {description.message}
           </div>
