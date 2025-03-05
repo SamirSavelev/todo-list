@@ -19,6 +19,14 @@
       border-color: #ccc;
       cursor: not-allowed;
     }
+    // &:-webkit-autofill,
+    // &:-webkit-autofill:hover,
+    // &:-webkit-autofill:focus,
+    // &:-webkit-autofill:active {
+    //   background-color: transparent !important;
+    //   -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    //   box-shadow: 0 0 0 1000px transparent inset !important;
+    // }
   }
 }
 .disabled {

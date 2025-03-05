@@ -1,6 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { DraftPage } from "../../draft/DraftPage";
-import { DraftPage2 } from "../../draft/DraftPage2";
 import {
   AboutPage,
   HomePage,
@@ -65,15 +63,5 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
-  },
-
-  {
-    path: "/draft",
-    element: <DraftPage />,
-  },
-
-  {
-    path: "/draft2",
-    element: <DraftPage2 />,
   },
 ]);

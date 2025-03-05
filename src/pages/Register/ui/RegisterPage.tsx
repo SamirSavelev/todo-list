@@ -3,12 +3,14 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import styles from "./Register.module.scss";
 import { Button, Input } from "../../../shared/ui/components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useRegisterMutation } from "src/api/auth/api";
+import { ErrorInterface } from "@app/types";
 
 // Описываем интерфейс формы
-interface IFormInputs {
-  name: string;
-  lastname: string;
-  surname: string;
+interface RegisterForm {
+  email: string;
+  firstName: string;
+  lastName: string;
   password: string;
   password2: string;
 }
@@ -19,13 +21,19 @@ export const RegisterPage = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<IFormInputs>();
+  } = useForm<RegisterForm>();
+  const [register, { isLoading, error }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
   // Функция для обработки отправки формы
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
+    try {
+      const response = await register(data).unwrap();
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const toggleShowPassword = () => {
@@ -41,39 +49,63 @@ export const RegisterPage = () => {
       <div className={styles.container}>
         <h2>Регистрация</h2>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          {/* Имя */}
           <Controller
-            name="name"
+            name="firstName"
             control={control}
             defaultValue=""
             rules={{ required: "Имя обязательно для заполнения" }}
             render={({ field }) => (
-              <Input {...field} placeholder="Введите имя" />
+              <Input
+                {...field}
+                placeholder="Введите имя"
+                autoComplete="new-password"
+                description={{
+                  message: errors.firstName ? errors.firstName.message : "",
+                  type: errors.firstName ? "error" : "info",
+                }}
+              />
             )}
           />
-          {errors.name && <p className={styles.error}>{errors.name.message}</p>}
-
-          {/* Фамилия */}
           <Controller
-            name="lastname"
+            name="lastName"
             control={control}
             defaultValue=""
+            rules={{ required: "Фамилия обязательна для заполнения" }}
             render={({ field }) => (
-              <Input {...field} placeholder="Введите фамилию" />
+              <Input
+                {...field}
+                placeholder="Введите фамилию"
+                autoComplete="new-password"
+                description={{
+                  message: errors.lastName ? errors.lastName.message : "",
+                  type: errors.lastName ? "error" : "info",
+                }}
+              />
             )}
           />
-
-          {/* Отчество */}
           <Controller
-            name="surname"
+            name="email"
             control={control}
             defaultValue=""
+            rules={{
+              required: "Email обязателен для заполнения",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Некорректный Email",
+              },
+            }}
             render={({ field }) => (
-              <Input {...field} placeholder="Введите отчество" />
+              <Input
+                {...field}
+                placeholder="Введите email"
+                autoComplete="new-password"
+                description={{
+                  message: errors.email ? errors.email.message : "",
+                  type: errors.email ? "error" : "info",
+                }}
+              />
             )}
           />
-
-          {/* Пароль */}
           <Controller
             name="password"
             control={control}
@@ -95,6 +127,11 @@ export const RegisterPage = () => {
                 {...field}
                 type={showPassword ? "text" : "password"}
                 placeholder="Придумайте пароль"
+                autoComplete="new-password"
+                description={{
+                  message: errors.password ? errors.password.message : "",
+                  type: errors.password ? "error" : "info",
+                }}
                 inputSuffix={
                   <span
                     onClick={toggleShowPassword}
@@ -106,11 +143,6 @@ export const RegisterPage = () => {
               />
             )}
           />
-          {errors.password && (
-            <p className={styles.error}>{errors.password.message}</p>
-          )}
-
-          {/* Подтверждение пароля */}
           <Controller
             name="password2"
             control={control}
@@ -125,6 +157,11 @@ export const RegisterPage = () => {
                 {...field}
                 type={showPassword2 ? "text" : "password"}
                 placeholder="Подтвердите пароль"
+                autoComplete="new-password"
+                description={{
+                  message: errors.password2 ? errors.password2.message : "",
+                  type: errors.password2 ? "error" : "info",
+                }}
                 inputSuffix={
                   <span
                     onClick={toggleShowPassword2}
@@ -136,13 +173,16 @@ export const RegisterPage = () => {
               />
             )}
           />
-          {errors.password2 && (
-            <p className={styles.error}>{errors.password2.message}</p>
-          )}
-
           <div className={styles.button_container}>
-            <Button type="primary">Зарегистрироваться</Button>
+            <Button disabled={isLoading} type="primary">
+              Зарегистрироваться
+            </Button>
           </div>
+          {error && (
+            <div className={styles.error}>
+              {(error as ErrorInterface)?.data?.message}
+            </div>
+          )}
         </form>
       </div>
     </div>

@@ -5,17 +5,11 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Button, Input } from "@shared/ui/components";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useLoginMutation } from "src/api/auth/api";
+import { ErrorInterface } from "@app/types";
 
 interface AuthForm {
   email: string;
   password: string;
-}
-
-interface ErrorInterface {
-  data: {
-    message: string;
-  };
-  status: number;
 }
 
 export const AuthPage = () => {
