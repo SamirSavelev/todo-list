@@ -3,12 +3,20 @@ import { ReactComponent as LogoIcon } from "@assets/icons/logo.svg";
 import { menu } from "./data/menu";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { ReactComponent as LogoutIcon } from "@assets/icons/logout.svg";
+import { useAppDispatch } from "@app/hooks";
+import { logOut } from "src/services/auth/authSlice";
 
 export const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const logout = () => navigate("/auth");
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    dispatch(logOut());
+    navigate("/auth");
+  };
 
   return (
     <div className={styles.container}>

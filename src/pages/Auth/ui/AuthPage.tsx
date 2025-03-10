@@ -6,6 +6,9 @@ import { Button, Input } from "@shared/ui/components";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useLoginMutation } from "src/api/auth/api";
 import { ErrorInterface } from "@app/types";
+import { useAppDispatch } from "@app/hooks";
+import { setCredentials } from "src/services/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 interface AuthForm {
   email: string;
@@ -18,6 +21,8 @@ export const AuthPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<AuthForm>();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [login, { isLoading, error }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,8 +32,11 @@ export const AuthPage = () => {
 
   const onSubmit: SubmitHandler<AuthForm> = async (data) => {
     try {
-      const response = await login(data).unwrap();
-      console.log(response);
+      const { accessToken, refreshToken } = await login(data).unwrap();
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      dispatch(setCredentials({ accessToken, refreshToken }));
+      navigate("/");
     } catch (error) {
       console.error(error);
     }

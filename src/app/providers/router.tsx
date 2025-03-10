@@ -10,46 +10,57 @@ import {
   SettingsPage,
 } from "../../pages";
 import { Layout } from "@shared/ui/Layout";
+import { AuthProvider } from "./AuthProvider";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
-        <HomePage />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <HomePage />
+        </Layout>
+      </AuthProvider>
     ),
   },
   {
     path: "/about",
     element: (
-      <Layout>
-        <AboutPage />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <AboutPage />
+        </Layout>
+      </AuthProvider>
     ),
   },
   {
     path: "/projects",
     element: (
-      <Layout>
-        <ProjectsPage />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <ProjectsPage />
+        </Layout>
+      </AuthProvider>
     ),
   },
   {
     path: "/profile",
     element: (
-      <Layout>
-        <ProfilePage />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <ProfilePage />
+        </Layout>
+      </AuthProvider>
     ),
   },
   {
     path: "/settings",
     element: (
-      <Layout>
-        <SettingsPage />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <SettingsPage />
+        </Layout>
+      </AuthProvider>
     ),
   },
   {
@@ -58,10 +69,18 @@ export const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <AuthPage />,
+    element: (
+      <AuthProvider>
+        <AuthPage />
+      </AuthProvider>
+    ),
   },
   {
     path: "/register",
-    element: <RegisterPage />,
+    element: (
+      <AuthProvider>
+        <RegisterPage />
+      </AuthProvider>
+    ),
   },
 ]);

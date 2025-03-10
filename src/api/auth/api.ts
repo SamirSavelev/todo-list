@@ -41,4 +41,4 @@ export const authApi = createApi({
 export const { useRegisterMutation, useLoginMutation, useRefreshMutation } =
   authApi;
 
-export const reducerAuth = authApi.reducer;
+export const authReducerApi = authApi.reducer;

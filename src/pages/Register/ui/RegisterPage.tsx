@@ -5,6 +5,7 @@ import { Button, Input } from "../../../shared/ui/components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRegisterMutation } from "src/api/auth/api";
 import { ErrorInterface } from "@app/types";
+import { useNavigate } from "react-router-dom";
 
 // Описываем интерфейс формы
 interface RegisterForm {
@@ -25,12 +26,17 @@ export const RegisterPage = () => {
   const [register, { isLoading, error }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   // Функция для обработки отправки формы
   const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
     try {
       const response = await register(data).unwrap();
-      console.log(response);
+      setSuccessMessage(response.message);
+      setTimeout(() => {
+        navigate("/auth");
+      }, 500);
     } catch (error) {
       console.error(error);
     }
@@ -182,6 +188,9 @@ export const RegisterPage = () => {
             <div className={styles.error}>
               {(error as ErrorInterface)?.data?.message}
             </div>
+          )}
+          {successMessage && (
+            <div className={styles.success}>{successMessage}</div>
           )}
         </form>
       </div>
