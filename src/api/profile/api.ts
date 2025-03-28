@@ -1,19 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { ProfileResponse } from "./types";
-import { RootState } from "@app/store";
+import { customBaseQuery } from "../customBaseQuery";
 
 export const profileApi = createApi({
   reducerPath: "profileApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.accessToken;
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: customBaseQuery,
   endpoints: ({ query }) => ({
     profile: query<ProfileResponse, void>({
       query: () => ({

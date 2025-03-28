@@ -2,6 +2,7 @@ import { useAppDispatch } from "@app/hooks";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLazyProfileQuery } from "src/api/profile/api";
+import { setProfile } from "src/api/profile/slice";
 import { setCredentials } from "src/services/auth/authSlice";
 
 const noAuthRoutes = ["/auth", "/register"];
@@ -18,7 +19,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const getProfileHandler = async () => {
     try {
       const response = await getProfile().unwrap();
-      console.log(response);
+      dispatch(setProfile(response));
     } catch (error) {
       console.error(error);
     }
@@ -57,7 +58,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     checkAuth();
-  }, [location, accessToken, refreshToken]);
+  }, []);
 
   return <>{children}</>;
 };
